@@ -1,0 +1,58 @@
+name: ACA NET VALIDATION
+
+on:
+  pull_request:
+    branches: 
+      - main
+      - dev
+    paths:
+      - src/Store/**
+      - src/Monitoring/**
+
+env:
+  DOTNET_VERSION: '6.0.401' # The .NET SDK version to use
+
+jobs:
+  build-and-test:
+
+    name: build-and-test-${{matrix.os}}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        language: ['csharp']
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      working-directory: ./src/Store
+      run: dotnet restore
+      
+    - name: Build
+      working-directory: ./src/Store
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Test
+      working-directory: ./src/Store
+      run: dotnet test --no-restore --verbosity normal
+    
+ #  - name: Initialize CodeQL
+ #    uses: github/codeql-action/init@v2      
+ #    with:
+ #      languages: ${{ matrix.language }}
+ #      working-directory: ./src/Store
+
+ #  - name: Autobuild
+ #    uses: github/codeql-action/autobuild@v2
+ #    with:
+ #      working-directory: ./src/Store
+
+ #  - name: Perform CodeQL Analysis
+ #    uses: github/codeql-action/analyze@v2
+ #    with:
+ #      working-directory: ./src/Store

@@ -1,0 +1,15 @@
+{
+  "name": "Java, .NET Core, and Python Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "vscjava.vscode-java-pack",
+    "ms-dotnettools.csharp",
+    "ms-python.python",
+    "github.copilot",
+    "ms-azuretools.vscode-bicep"
+  ],
+  "postCreateCommand": "dotnet --list-sdks && java -version && python --version"
+}

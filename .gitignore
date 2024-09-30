@@ -1,0 +1,42 @@
+# Entornos virtuales
+src/Python.Store.ProductApi/venv
+src/Python.Store.ProductApi/env
+src/Python.Store.ProductApi/.venv
+
+# Cachés de Python
+src/Python.Store.ProductApi/src/controllers/__pycache__
+src/Python.Store.ProductApi/tests/__pycache__
+src/Python.Store.ProductApi/.pytest_cache
+**/__pycache__
+
+# Archivos de configuración de IDE
+#src/Python.Store.ProductApi/.vscode/
+#src/Python.Store.ProductApi/.idea/
+
+# Archivos de logs
+src/Python.Store.ProductApi/logs/
+src/Python.Store.ProductApi/*.log
+
+# Archivos de compilación
+src/Python.Store.ProductApi/build/
+src/Python.Store.ProductApi/dist/
+src/Python.Store.ProductApi/*.egg-info/
+
+# Archivos de cobertura de pruebas
+src/Python.Store.ProductApi/htmlcov/
+src/Python.Store.ProductApi/.coverage
+src/Python.Store.ProductApi/.coverage.*
+
+# Archivos temporales
+src/Python.Store.ProductApi/tmp/
+src/Python.Store.ProductApi/temp/
+src/Python.Store.ProductApi/*.tmp
+src/Python.Store.ProductApi/*.temp
+src/Monitoring/obj*
+src/Monitoring/bin/
+src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfo.cs
+src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfo.cs
+src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfo.cs
+src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfoInputs.cache
+src/Store/obj/Debug/net6.0/Store.AssemblyInfo.cs
+src/Store/obj/Debug/net6.0/Store.AssemblyInfo.cs

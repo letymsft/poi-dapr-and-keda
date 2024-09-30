@@ -1,0 +1,17 @@
+name: ACA DEV INVENTORY JAVA API
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ dev ]
+    paths:
+      - src/Java.Store.InventoryApi/**
+jobs:
+  Build-Publish-ACA:
+    uses: ./.github/workflows/Template_ACA.yml
+    with:
+      CONTAINER_NAME: inventory-java-api
+      DOCKER_PATH: ./src/Java.Store.InventoryApi/DockerFile
+      DOCKER_BUILD_CONTEXT: ./src/Java.Store.InventoryApi
+      ACA_ENVIRONMENT : dev
+    secrets: inherit

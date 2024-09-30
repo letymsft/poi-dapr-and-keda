@@ -1,0 +1,6 @@
+# Global owners
+* @erramire @RodrigoVeraRomero
+
+# Owners for specific directories
+/src/Python.Store.ProductApi/ @erramire
+/src/Java.Store.InventoryApi/ @RodrigoVeraRomero
