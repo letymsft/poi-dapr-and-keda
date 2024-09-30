@@ -105,7 +105,7 @@ module module_containerregistry 'br/public:avm/res/container-registry/registry:0
   name: 'pid-cr-${replaceAll(containerRegistry.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
   scope: resourceGroup(resourceGrName)
   params: {
-    name: replaceAll(containerRegistry.name, tokenReplacements, true)
+    name: '${replaceAll(containerRegistry.name, tokenReplacements, true)}-${uniqueString(deployment().name)}'
     acrSku: containerRegistry.acrSku
     location: location
     tags: tags
