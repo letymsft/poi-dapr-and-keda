@@ -82,7 +82,7 @@
                 "cpu": "0.5",
                 "memory": "1.0Gi",
                 "ingressExternal": true,
-                "targetPort": 80,
+                "targetPort": 8080,
                 "disableIngress": false,
                 "ingressTransport": "http",
                 "scaleMaxReplicas": 2,
