@@ -56,7 +56,7 @@
           {
             "name": "__LOC__CSU__ENV__-GHADOP-SP",
             "principalType":"ServicePrincipal",
-            "roleDefinitionIdOrName":"7f951dda-4ed3-4680-a7ca-43fe172d538d"
+            "roleDefinitionIdOrName":"970c4042-ed4f-4383-8990-1b4c1a2f044d"
           }
       },
       "portal": {

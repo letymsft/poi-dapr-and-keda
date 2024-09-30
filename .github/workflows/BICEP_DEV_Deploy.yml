@@ -13,5 +13,5 @@ jobs:
         LOCATION: 'centralus'
         TEMPLATE_FILE: 'infra/csu_gh_adoption_main.bicep'
         PARAMETERS_FILE: 'infra/csu_gh_adoption_dev.json'
-        KIND: 'create'
+        KIND: 'what-if' #'create'
     secrets: inherit
