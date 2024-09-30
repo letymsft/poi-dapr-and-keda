@@ -62,7 +62,7 @@ jobs:
           loadTestConfigFile: 'src/Java.Store.InventoryApi/src/test/resources/jmeter/config.yaml'
           loadTestResource: ${{ vars.LOAD_TESTING_COMP }}
           resourceGroup: ${{ vars.RESOURCE_GROUP }}
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4.4.0
         with:
           name: loadTestResults
           path: ${{ github.workspace }}/loadTest
