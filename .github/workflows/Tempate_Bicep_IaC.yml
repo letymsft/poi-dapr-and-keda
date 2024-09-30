@@ -32,7 +32,7 @@ jobs:
     - name: Azure Bicep Deployment
       id: bicep-deployment
       run: |
-        BICEP_DATA=$(az deployment sub ${{ inputs.KIND }} --name CSU_GH_ADOPTION --location ${{ inputs.LOCATION }} --template-file ${{ inputs.TEMPLATE_FILE }} --parameters ${{ inputs.PARAMETERS_FILE }})
+        BICEP_DATA=$(az deployment sub ${{ inputs.KIND }} --name LOAD_TESTING_DEMO --location ${{ inputs.LOCATION }} --template-file ${{ inputs.TEMPLATE_FILE }} --parameters ${{ inputs.PARAMETERS_FILE }})
 
         delimiter="$(openssl rand -hex 8)"
         echo "summary<<${delimiter}" >> $GITHUB_OUTPUT
