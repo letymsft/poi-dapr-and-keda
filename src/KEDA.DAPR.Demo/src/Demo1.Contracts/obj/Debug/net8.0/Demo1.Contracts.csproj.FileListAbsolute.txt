@@ -1,0 +1,11 @@
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\bin\Debug\net8.0\Demo1.Contracts.deps.json
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\bin\Debug\net8.0\Demo1.Contracts.dll
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\bin\Debug\net8.0\Demo1.Contracts.pdb
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\Demo1.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\Demo1.Contracts.AssemblyInfoInputs.cache
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\Demo1.Contracts.AssemblyInfo.cs
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\Demo1.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\Demo1.Contracts.dll
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\refint\Demo1.Contracts.dll
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\Demo1.Contracts.pdb
+C:\Users\leticiat\Documents\Lety\Microsoft\Proyectos\Dapr\Tec\dotnet\demo1\src\Demo1.Contracts\obj\Debug\net8.0\ref\Demo1.Contracts.dll

@@ -27,6 +27,8 @@ param portal object
 
 param serviceBus object
 
+param apiarquitectura object
+
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
 
 func conditionalToLower(value string, valueToLower bool) string => valueToLower ? toLower(value) : value
@@ -99,24 +101,6 @@ module module_userIdentity 'br/public:avm/res/managed-identity/user-assigned-ide
     module_resourceGroup
   ]
 }
-
-////////////////////////////////////////Start infrastructure for DAPR & KEDA Demo////////////////////////////////////////
-module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
-  name: 'pid-sb-${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
-  scope: resourceGroup(resourceGrName)
-  params: {
-    name: replaceAll(serviceBus.name, tokenReplacements, false)
-    location: location
-    skuObject: {
-      name: 'Standard'
-    }
-    tags: tags
-  }
-  dependsOn: [
-    module_resourceGroup
-  ]
-}
-/////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
 
 module module_containerregistry 'br/public:avm/res/container-registry/registry:0.3.2' = {
   name: 'pid-cr-${replaceAll(containerRegistry.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
@@ -271,3 +255,68 @@ module containerAppPortal 'br/public:avm/res/app/container-app:0.7.0' = {
     module_environment
   ]
 }
+
+////////////////////////////////////////Start infrastructure for DAPR & KEDA Demo////////////////////////////////////////
+module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
+  name: 'pid-sb-${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  scope: resourceGroup(resourceGrName)
+  params: {
+    name: replaceAll(serviceBus.name, tokenReplacements, false)
+    location: location
+    skuObject: {
+      name: 'Standard'
+    }
+    tags: tags
+  }
+  dependsOn: [
+    module_resourceGroup
+  ]
+}
+
+module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
+  name: 'pid-api-${replaceAll(apiarquitectura.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  scope: resourceGroup(resourceGrName)
+  params: {
+    // Required parameters
+    containers: [
+      {
+        image: apiarquitectura.image //'mcr.microsoft.com/azuredocs/apiarquitectura:latest'
+        name: apiarquitectura.name//'apiarquitectura'
+        resources: {
+          cpu: apiarquitectura.cpu//'1'
+          memory: apiarquitectura.memory //0.5Gi'
+        }
+      }
+    ]
+    environmentResourceId: module_environment.outputs.resourceId
+    name: apiarquitectura.name
+    location: location
+    ingressExternal: apiarquitectura.ingressExternal
+    ingressTargetPort: apiarquitectura.targetPort  //8080
+    disableIngress: apiarquitectura.disableIngress //false
+    ingressTransport: apiarquitectura.ingressTransport //'http'
+    workloadProfileName: environment.workloadProfileName
+    scaleMaxReplicas: apiarquitectura.scaleMaxReplicas
+    scaleMinReplicas: apiarquitectura.scaleMinReplicas
+    tags: tags
+    managedIdentities: {userAssignedResourceIds: [module_userIdentity.outputs.resourceId]}
+    dapr: {
+      enabled: apiarquitectura.daprEnabled
+      sidecar: {
+        appName: apiarquitectura.daprAppName
+        appPort: apiarquitectura.daprAppPort
+        logLevel: 'info'
+      }
+    } 
+    registries: [
+      {
+        identity: module_userIdentity.outputs.resourceId
+        server: module_containerregistry.outputs.loginServer
+      }
+    ]
+  }
+  dependsOn: [
+    module_environment
+  ]
+}
+/////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////

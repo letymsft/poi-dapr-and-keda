@@ -1,0 +1,7 @@
+componentType: pubsub.azure.servicebus.topics
+version: v1
+metadata:
+- name: namespaceName
+  value: "sb-dapr-poc-4.servicebus.windows.net"
+- name: consumerID
+  value: "ftp4-subscription"

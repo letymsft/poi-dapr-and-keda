@@ -1,0 +1,9 @@
+componentType: pubsub.azure.servicebus.topics
+version: v1
+metadata:
+- name: namespaceName
+  value: "sb-dapr-poc-4.servicebus.windows.net"
+- name: consumerID
+  value: "apipresupuesto4-subscription"
+scopes:
+- apipresupuesto4

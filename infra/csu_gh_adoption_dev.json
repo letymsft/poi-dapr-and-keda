@@ -120,6 +120,24 @@
                 }
               ]
             }
+        },
+        "apiarquitectura": {
+          "value":
+            {
+                "name": "apiarquitectura",
+                "image": "mcr.microsoft.com/azuredocs/apiarquitectura:latest",
+                "cpu": "0.5",
+                "memory": "1.0Gi",
+                "ingressExternal": false,
+                "targetPort": 8080,
+                "disableIngress": true,
+                "ingressTransport": "http",
+                "scaleMaxReplicas": 2,
+                "scaleMinReplicas": 1,
+                "daprEnabled": true,
+                "daprAppName": "apiarquitectura",
+                "daprAppPort": 8080
+            }
         }
     }
 }
