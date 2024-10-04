@@ -107,7 +107,9 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
   params: {
     name: replaceAll(serviceBus.name, tokenReplacements, false)
     location: location
-    sku: 'Standard'
+    skuObject: {
+      name: 'Standard'
+    }
     tags: tags
   }
   dependsOn: [
