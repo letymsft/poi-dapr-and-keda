@@ -25,6 +25,7 @@ param product object
 
 param portal object
 
+param serviceBus object
 
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
 
@@ -48,8 +49,6 @@ module module_resourceGroup 'br/public:avm/res/resources/resource-group:0.2.4' =
     tags: tags
   }
 }
-
-
 
 module module_workspace 'br/public:avm/res/operational-insights/workspace:0.4.1' = {
   name: 'pid-ws-${replaceAll(workspace.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
@@ -100,6 +99,58 @@ module module_userIdentity 'br/public:avm/res/managed-identity/user-assigned-ide
     module_resourceGroup
   ]
 }
+
+////////////////////////////////////////Start infrastructure for DAPR & KEDA Demo////////////////////////////////////////
+module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
+  name: 'pid-sb-${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  scope: resourceGroup(resourceGrName)
+  params: {
+    name: replaceAll(serviceBus.name, tokenReplacements, false)
+    location: location
+    sku: 'Standard'
+    tags: tags
+  }
+  dependsOn: [
+    module_resourceGroup
+  ]
+}
+
+/*resource serviceBusTopic1 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
+  name: '${replaceAll(serviceBusNamespace.name, tokenReplacements, false)}/topic1'
+  scope: resourceGroup(resourceGrName)
+  location: location
+  properties: {
+    enablePartitioning: true
+  }
+  dependsOn: [
+    module_servicebus
+  ]
+}
+
+resource serviceBusTopic2 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
+  name: '${replaceAll(serviceBusNamespace.name, tokenReplacements, false)}/topic2'
+  scope: resourceGroup(resourceGrName)
+  location: location
+  properties: {
+    enablePartitioning: true
+  }
+  dependsOn: [
+    module_servicebus
+  ]
+}
+
+resource serviceBusTopic3 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
+  name: '${replaceAll(serviceBusNamespace.name, tokenReplacements, false)}/topic3'
+  scope: resourceGroup(resourceGrName)
+  location: location
+  properties: {
+    enablePartitioning: true
+  }
+  dependsOn: [
+    module_servicebus
+  ]
+}*/
+/////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
 
 module module_containerregistry 'br/public:avm/res/container-registry/registry:0.3.2' = {
   name: 'pid-cr-${replaceAll(containerRegistry.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'

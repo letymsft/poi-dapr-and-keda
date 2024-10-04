@@ -103,8 +103,12 @@
                 "scaleMaxReplicas": 2,
                 "scaleMinReplicas": 1
             }
-        
+        },
+        "serviceBus": {
+          "value": 
+            {
+              "name": "__LOC__CSU__ENV__-GHADOP-SB"
+            }
         }
-      
     }
 }
