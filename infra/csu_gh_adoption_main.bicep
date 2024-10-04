@@ -139,19 +139,13 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
 
 resource serviceBusTopic1 'Microsoft.ServiceBus/namespaces/topics@2023-01-01-preview' = {
   name: replaceAll(serviceBus.topics[0].name, tokenReplacements, false)
-  location: location
   properties: {
     defaultMessageTimeToLive: '14.00:00:00'
     enableBatchedOperations: false
     enableExpress: false
     enablePartitioning: true
-    enableSubscriptionPartitioning: false
-    filteringMessagesBeforePublishing: false
-    isAnonymousAccessible: false
-    isExpress: false
     maxSizeInMegabytes: 1024
     requiresDuplicateDetection: false
-    sizeInBytes: 0
     supportOrdering: false
   }
   dependsOn: [
