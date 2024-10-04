@@ -111,47 +111,31 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
       name: 'Standard'
     }
     tags: tags
+    topics: [
+      {
+        name: replaceAll(serviceBus.topics.topic1.name, tokenReplacements, false)
+        maxDeliveryCount: 10
+        lockDuration: 'PT5M'
+        deadLetteringOnMessageExpiration: true
+      }
+      {
+        name: replaceAll(serviceBus.topics.topic2.name, tokenReplacements, false)
+        maxDeliveryCount: 10
+        lockDuration: 'PT5M'
+        deadLetteringOnMessageExpiration: true
+      }
+      {
+        name: replaceAll(serviceBus.topics.topic3.name, tokenReplacements, false)
+        maxDeliveryCount: 10
+        lockDuration: 'PT5M'
+        deadLetteringOnMessageExpiration: true
+      }
+    ]
   }
   dependsOn: [
     module_resourceGroup
   ]
 }
-
-/*resource serviceBusTopic1 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
-  name: '${replaceAll(serviceBusNamespace.name, tokenReplacements, false)}/topic1'
-  scope: resourceGroup(resourceGrName)
-  location: location
-  properties: {
-    enablePartitioning: true
-  }
-  dependsOn: [
-    module_servicebus
-  ]
-}
-
-resource serviceBusTopic2 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
-  name: '${replaceAll(serviceBusNamespace.name, tokenReplacements, false)}/topic2'
-  scope: resourceGroup(resourceGrName)
-  location: location
-  properties: {
-    enablePartitioning: true
-  }
-  dependsOn: [
-    module_servicebus
-  ]
-}
-
-resource serviceBusTopic3 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview' = {
-  name: '${replaceAll(serviceBusNamespace.name, tokenReplacements, false)}/topic3'
-  scope: resourceGroup(resourceGrName)
-  location: location
-  properties: {
-    enablePartitioning: true
-  }
-  dependsOn: [
-    module_servicebus
-  ]
-}*/
 /////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
 
 module module_containerregistry 'br/public:avm/res/container-registry/registry:0.3.2' = {

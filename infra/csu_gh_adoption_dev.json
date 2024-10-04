@@ -107,7 +107,24 @@
         "serviceBus": {
           "value": 
             {
-              "name": "__LOC__CSU__ENV__GHADOPSB"
+              "name": "__LOC__CSU__ENV__GHADOPSB",
+              "topics": [
+                {
+                  "topic1": {
+                    "name": "arquitecturapubsub"
+                  }
+                },
+                {
+                  "topic2": {
+                    "name": "presupuestopubsub"
+                  }
+                },
+                {
+                  "topic3": {
+                    "name": "ftppubsub"
+                  }
+                }
+              ]
             }
         }
     }
