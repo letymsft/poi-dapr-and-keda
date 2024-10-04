@@ -107,7 +107,7 @@
         "serviceBus": {
           "value": 
             {
-              "name": "__LOC__CSU__ENV__-GHADOP-SB"
+              "name": "__LOC__CSU__ENV__GHADOPSB"
             }
         }
     }
