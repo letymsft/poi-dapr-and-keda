@@ -110,19 +110,13 @@
               "name": "__LOC__CSU__ENV__GHADOPSB",
               "topics": [
                 {
-                  "topic1": {
-                    "name": "arquitecturapubsub"
-                  }
+                  "name": "arquitecturapubsub"
                 },
                 {
-                  "topic2": {
-                    "name": "presupuestopubsub"
-                  }
+                  "name": "presupuestopubsub"
                 },
                 {
-                  "topic3": {
-                    "name": "ftppubsub"
-                  }
+                  "name": "ftppubsub"
                 }
               ]
             }
