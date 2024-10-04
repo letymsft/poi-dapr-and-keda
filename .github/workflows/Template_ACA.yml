@@ -30,7 +30,7 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr build --image ${{ vars.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ inputs.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ vars.AZURE_CONTAINER_REGISTRY }} -g ${{ vars.RESOURCE_GROUP }} -f ${{ inputs.DOCKER_PATH }} ${{ inputs.DOCKER_BUILD_CONTEXT }}
+          az acr build --image ${{ vars.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest --registry ${{ vars.AZURE_CONTAINER_REGISTRY }} -g ${{ vars.RESOURCE_GROUP }} -f ${{ inputs.DOCKER_PATH }} ${{ inputs.DOCKER_BUILD_CONTEXT }}
   deploy:
     runs-on: ubuntu-latest
     environment: ${{ inputs.ACA_ENVIRONMENT }}
