@@ -11,7 +11,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0.201-bookworm-slim-amd64 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src/KEDA.DAPR.Demo/src
-COPY ["/src/KEDA.DAPR.Demo/src/Demo1.Arquitectura/Demo1.Arquitectura.csproj", "Demo1.Arquitectura/"]
+COPY ["./Demo1.Arquitectura/Demo1.Arquitectura.csproj", "Demo1.Arquitectura/"]
 RUN dotnet restore "./Demo1.Arquitectura/Demo1.Arquitectura.csproj"
 COPY . .
 WORKDIR "/src/KEDA.DAPR.Demo/src/Demo1.Arquitectura"
