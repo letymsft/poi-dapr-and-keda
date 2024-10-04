@@ -302,11 +302,14 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     managedIdentities: {userAssignedResourceIds: [module_userIdentity.outputs.resourceId]}
     dapr: {
       enabled: apiarquitectura.daprEnabled
-      sidecar: {
+      appName: apiarquitectura.daprAppName
+      appPort: apiarquitectura.daprAppPort
+      logLevel: 'info'
+      /*sidecar: {
         appName: apiarquitectura.daprAppName
         appPort: apiarquitectura.daprAppPort
         logLevel: 'info'
-      }
+      }*/
     } 
     registries: [
       {
