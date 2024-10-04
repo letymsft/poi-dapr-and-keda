@@ -113,19 +113,19 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
     tags: tags
     topics: [
       {
-        name: replaceAll(serviceBus.topics.topic1.name, tokenReplacements, false)
+        name: replaceAll(serviceBus.topics[0].name, tokenReplacements, false)
         maxDeliveryCount: 10
         lockDuration: 'PT5M'
         deadLetteringOnMessageExpiration: true
       }
       {
-        name: replaceAll(serviceBus.topics.topic2.name, tokenReplacements, false)
+        name: replaceAll(serviceBus.topics[1].name, tokenReplacements, false)
         maxDeliveryCount: 10
         lockDuration: 'PT5M'
         deadLetteringOnMessageExpiration: true
       }
       {
-        name: replaceAll(serviceBus.topics.topic3.name, tokenReplacements, false)
+        name: replaceAll(serviceBus.topics[2].name, tokenReplacements, false)
         maxDeliveryCount: 10
         lockDuration: 'PT5M'
         deadLetteringOnMessageExpiration: true
