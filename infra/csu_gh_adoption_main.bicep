@@ -29,6 +29,8 @@ param serviceBus object
 
 param apiarquitectura object
 
+param apipresupuesto object
+
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
 
 func conditionalToLower(value string, valueToLower bool) string => valueToLower ? toLower(value) : value
@@ -305,6 +307,51 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
       appId: apiarquitectura.daprAppId
       appProtocol: 'http'
       appPort: apiarquitectura.daprAppPort
+    }
+    registries: [
+      {
+        identity: module_userIdentity.outputs.resourceId
+        server: module_containerregistry.outputs.loginServer
+      }
+    ]
+  }
+  dependsOn: [
+    module_environment
+  ]
+}
+
+module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
+  name: 'pid-api-${replaceAll(apipresupuesto.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  scope: resourceGroup(resourceGrName)
+  params: {
+    // Required parameters
+    containers: [
+      {
+        image: apipresupuesto.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+        name: apipresupuesto.name//'apipresupuesto'
+        resources: {
+          cpu: apipresupuesto.cpu//'1'
+          memory: apipresupuesto.memory //0.5Gi'
+        }
+      }
+    ]
+    environmentResourceId: module_environment.outputs.resourceId
+    name: apipresupuesto.name
+    location: location
+    ingressExternal: apipresupuesto.ingressExternal
+    ingressTargetPort: apipresupuesto.targetPort  //8080
+    disableIngress: apipresupuesto.disableIngress //false
+    ingressTransport: apipresupuesto.ingressTransport //'http'
+    workloadProfileName: environment.workloadProfileName
+    scaleMaxReplicas: apipresupuesto.scaleMaxReplicas
+    scaleMinReplicas: apipresupuesto.scaleMinReplicas
+    tags: tags
+    managedIdentities: {userAssignedResourceIds: [module_userIdentity.outputs.resourceId]}
+    dapr: {
+      enabled: apipresupuesto.daprEnabled
+      appId: apipresupuesto.daprAppId
+      appProtocol: 'http'
+      appPort: apipresupuesto.daprAppPort
     }
     registries: [
       {
