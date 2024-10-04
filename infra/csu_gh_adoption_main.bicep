@@ -280,7 +280,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     // Required parameters
     containers: [
       {
-        image: apiarquitectura.image //'mcr.microsoft.com/azuredocs/apiarquitectura:latest'
+        image: apiarquitectura.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
         name: apiarquitectura.name//'apiarquitectura'
         resources: {
           cpu: apiarquitectura.cpu//'1'
