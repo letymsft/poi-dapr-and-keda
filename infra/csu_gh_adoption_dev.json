@@ -135,7 +135,7 @@
                 "scaleMaxReplicas": 2,
                 "scaleMinReplicas": 1,
                 "daprEnabled": true,
-                "daprAppName": "apiarquitectura",
+                "daprAppId": "apiarquitectura",
                 "daprAppPort": 8080
             }
         }

@@ -300,17 +300,12 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     scaleMinReplicas: apiarquitectura.scaleMinReplicas
     tags: tags
     managedIdentities: {userAssignedResourceIds: [module_userIdentity.outputs.resourceId]}
-    /*dapr: {
+    dapr: {
       enabled: apiarquitectura.daprEnabled
-      appName: apiarquitectura.daprAppName
+      appId: apiarquitectura.daprAppId
+      appProtocol: 'http'
       appPort: apiarquitectura.daprAppPort
-      logLevel: 'info'
-      sidecar: {
-        appName: apiarquitectura.daprAppName
-        appPort: apiarquitectura.daprAppPort
-        logLevel: 'info'
-      }
-    }*/ 
+    }
     registries: [
       {
         identity: module_userIdentity.outputs.resourceId
