@@ -121,6 +121,24 @@
               ]
             }
         },
+        "apiiniciativa": {
+          "value":
+            {
+                "name": "apiiniciativa",
+                "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+                "cpu": "0.5",
+                "memory": "1.0Gi",
+                "ingressExternal": false,
+                "targetPort": 8080,
+                "disableIngress": true,
+                "ingressTransport": "http",
+                "scaleMaxReplicas": 2,
+                "scaleMinReplicas": 1,
+                "daprEnabled": true,
+                "daprAppId": "apiiniciativa",
+                "daprAppPort": 8080
+            }
+        },
         "apiarquitectura": {
           "value":
             {

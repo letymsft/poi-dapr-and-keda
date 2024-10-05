@@ -1,0 +1,17 @@
+name: ACA DEV API Iniciativa
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ dev ]
+    paths:
+      - src/KEDA.DAPR.Demo/src/Demo1.Iniciativa/**
+jobs:
+  Build-Publish-ACA:
+    uses: ./.github/workflows/Template_ACA.yml
+    with:
+      CONTAINER_NAME: apiiniciativa
+      DOCKER_PATH: ./src/KEDA.DAPR.Demo/src/Demo1.Iniciativa/Dockerfile
+      DOCKER_BUILD_CONTEXT: ./src/KEDA.DAPR.Demo/src
+      ACA_ENVIRONMENT : dev
+    secrets: inherit

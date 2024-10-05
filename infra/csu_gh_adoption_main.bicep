@@ -27,6 +27,8 @@ param portal object
 
 param serviceBus object
 
+param apiiniciativa object
+
 param apiarquitectura object
 
 param apipresupuesto object
@@ -272,6 +274,51 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
   }
   dependsOn: [
     module_resourceGroup
+  ]
+}
+
+module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
+  name: 'pid-api-${replaceAll(apiiniciativa.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  scope: resourceGroup(resourceGrName)
+  params: {
+    // Required parameters
+    containers: [
+      {
+        image: apiiniciativa.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+        name: apiiniciativa.name//'apiiniciativa'
+        resources: {
+          cpu: apiiniciativa.cpu//'1'
+          memory: apiiniciativa.memory //0.5Gi'
+        }
+      }
+    ]
+    environmentResourceId: module_environment.outputs.resourceId
+    name: apiiniciativa.name
+    location: location
+    ingressExternal: apiiniciativa.ingressExternal
+    ingressTargetPort: apiiniciativa.targetPort  //8080
+    disableIngress: apiiniciativa.disableIngress //false
+    ingressTransport: apiiniciativa.ingressTransport //'http'
+    workloadProfileName: environment.workloadProfileName
+    scaleMaxReplicas: apiiniciativa.scaleMaxReplicas
+    scaleMinReplicas: apiiniciativa.scaleMinReplicas
+    tags: tags
+    managedIdentities: {userAssignedResourceIds: [module_userIdentity.outputs.resourceId]}
+    dapr: {
+      enabled: apiiniciativa.daprEnabled
+      appId: apiiniciativa.daprAppId
+      appProtocol: 'http'
+      appPort: apiiniciativa.daprAppPort
+    }
+    registries: [
+      {
+        identity: module_userIdentity.outputs.resourceId
+        server: module_containerregistry.outputs.loginServer
+      }
+    ]
+  }
+  dependsOn: [
+    module_environment
   ]
 }
 
