@@ -1,8 +1,7 @@
 name: IAC PROD DEPLOYMENT
 env:
   # Setting environment variables
-  env_var: PRO
-  LOCATION: 'your-location-value'
+  NODE_ENV: production
 on:
   workflow_dispatch:
   push:
