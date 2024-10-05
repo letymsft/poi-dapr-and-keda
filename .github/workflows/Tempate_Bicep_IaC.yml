@@ -1,5 +1,4 @@
 name: Template IaC
-
 #env:
 #  # Setting an environment variable with the value of a configuration variable
 #  env_var: ${{ vars.ENV_CONTEXT_VAR }}
@@ -32,6 +31,9 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Print all environment variables
+      run: env
 
     - name: Azure Bicep Deployment
       id: bicep-deployment
