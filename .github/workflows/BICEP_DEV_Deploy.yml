@@ -1,4 +1,9 @@
 name: IAC DEV DEPLOYMENT
+
+env:
+  # Setting an environment variable with the value of a configuration variable
+  env_var: DEV
+
 on:
   workflow_dispatch:
   push:
@@ -10,7 +15,7 @@ jobs:
   Deploy_Baseline:
     uses: ./.github/workflows/Tempate_Bicep_IaC.yml
     with:
-        LOCATION: 'centralus'
+        LOCATION: ${{ env.LOCATION }}
         TEMPLATE_FILE: 'infra/csu_gh_adoption_main.bicep'
         PARAMETERS_FILE: 'infra/csu_gh_adoption_dev.json'
         KIND: 'create' #'create'
