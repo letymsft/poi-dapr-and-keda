@@ -1,4 +1,7 @@
 name: IAC PROD DEPLOYMENT
+env:
+  # Setting environment variables
+  env_var: PRO
 on:
   workflow_dispatch:
   push:
