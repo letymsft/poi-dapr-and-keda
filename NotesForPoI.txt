@@ -1,0 +1,113 @@
+1. cd [..]\load-testing-demo\src\KEDA.DAPR.Demo\src
+
+
+2. Variables definition 
+    $RESOURCE_GROUP="CUS-CSU-DEV-GHADOP-RGP"
+    $ENVIRONMENT="CUSCSUDEV-GHADOP-ENV"
+    $BACKEND_SVC_NAME_INICIATIVA="apiiniciativa"
+    $BACKEND_SVC_NAME_ARQUITECTURA="apiarquitectura"
+    $BACKEND_SVC_NAME_PRESUPUESTO="apipresupuesto"   
+    $NamespaceName="CUSCSUDEVGHADOPSB"
+    $TopicNameArquitectura="arquitecturapubsub"
+    $TopicNamePresupuesto="presupuestopubsub"
+    $TopicNameFtp="ftppubsub"
+#   $TopicSubscriptionArquitectura="apiarquitectura-subscription" -> AUTODISCOVER BY DAPR BECAUSE WE HAVE A SUBSCRIPTION DECLARATIVE 
+#   $TopicSubscriptionPresupuesto="apipresupuesto-subscription" -> AUTODISCOVER BY DAPR BECAUSE WE HAVE A SUBSCRIPTION DECLARATIVE
+    $TopicSubscriptionFtp="ftp-subscription" -> CREATE IT IF WE DONT HAVE A SUBSCRIPTION DECLARATIVE (IN THE CODE)
+
+3. Deploy the DAPR components
+   az containerapp env dapr-component set `
+     --name $ENVIRONMENT `
+     --resource-group $RESOURCE_GROUP `
+     --dapr-component-name pubsub-sandbox-servicebus `
+     --yaml '.\components\pubsub-sandbox-servicebus.yaml'
+
+4. Create topics under namespace
+   az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicNameArquitectura
+   az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicNamePresupuesto
+   az servicebus topic create --resource-group $RESOURCE_GROUP --namespace-name $NamespaceName --name $TopicNameFtp
+
+
+5. Create subscription for $TopicNameFtp
+   az servicebus topic subscription create `
+      --resource-group $RESOURCE_GROUP `
+      --namespace-name $NamespaceName `
+      --topic-name $TopicNameFtp `
+      --name $TopicSubscriptionFtp
+
+
+6. Create system-assigned identity for the containers apps
+   az containerapp identity assign `
+      --resource-group $RESOURCE_GROUP `
+      --name $BACKEND_SVC_NAME_INICIATIVA `
+      --system-assigned
+
+   az containerapp identity assign `
+      --resource-group $RESOURCE_GROUP `
+      --name $BACKEND_SVC_NAME_ARQUITECTURA `
+      --system-assigned
+
+   az containerapp identity assign `
+      --resource-group $RESOURCE_GROUP `
+      --name $BACKEND_SVC_NAME_PRESUPUESTO `
+      --system-assigned
+
+7. Associate the container app system-identity with the target Azure Service Bus resouce - using the previous info
+   $subscription_id = "d5d8a14a-99b7-45a7-91f4-0b705987b98f"	## Your Azure Subscription
+   $principalId_INICIATIVA = "f922d8ac-08dd-487c-985d-855b941d812a" ## Principal Id after creating system identity for container app
+   $principalId_ARQUITECTURA = "1058157a-28bd-459d-9279-7c8919f20928" ## Principal Id after creating system identity for container app
+   $principalId_PRESUPUESTO = "82618301-5ac7-4c5a-9186-6ca7f410a832" ## Principal Id after creating system identity for container app 
+   $roleNameOrId_SENDER = "Azure Service Bus Data Sender" ## Built in role name
+   $roleNameOrId_RECEIVER = "Azure Service Bus Data Receiver" ## Built in role name
+   $roleNameOrId_OWNER = "Azure Service Bus Data Owner" ## Built in role name
+
+   az role assignment create `
+      --assignee $principalId_INICIATIVA `
+      --role $roleNameOrId_SENDER `
+      --scope /subscriptions/$subscription_id/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+
+   az role assignment create `
+      --assignee $principalId_ARQUITECTURA `
+      --role $roleNameOrId_OWNER `
+      --scope /subscriptions/$subscription_id/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+
+   az role assignment create `
+      --assignee $principalId_PRESUPUESTO `
+      --role $roleNameOrId_OWNER `
+      --scope /subscriptions/$subscription_id/resourcegroups/$RESOURCE_GROUP/providers/Microsoft.ServiceBus/namespaces/$NamespaceName
+
+
+
+
+* Restart the container app revisions (en caso de que se requiera reiniciar)
+    - Get revision name and assign it to a variable
+      $REVISION_NAME_INICIATIVA = (az containerapp revision list `
+                                      --name $BACKEND_SVC_NAME_INICIATIVA  `
+                                      --resource-group $RESOURCE_GROUP `
+                                      --query [0].name)
+
+      $REVISION_NAME_ARQUITECTURA = (az containerapp revision list `
+                                        --name $BACKEND_SVC_NAME_ARQUITECTURA  `
+                                        --resource-group $RESOURCE_GROUP `
+                                        --query [0].name)
+
+      $REVISION_NAME_PRESUPUESTO = (az containerapp revision list `
+                                       --name $BACKEND_SVC_NAME_PRESUPUESTO  `
+                                       --resource-group $RESOURCE_GROUP `
+                                       --query [0].name)
+ 
+    - Restart revision by name							   
+      az containerapp revision restart `
+         --resource-group $RESOURCE_GROUP `
+         --name $BACKEND_SVC_NAME_INICIATIVA  `
+         --revision $REVISION_NAME_INICIATIVA
+
+      az containerapp revision restart `
+         --resource-group $RESOURCE_GROUP `
+         --name $BACKEND_SVC_NAME_ARQUITECTURA  `
+         --revision $REVISION_NAME_ARQUITECTURA
+
+      az containerapp revision restart `
+         --resource-group $RESOURCE_GROUP `
+         --name $BACKEND_SVC_NAME_PRESUPUESTO  `
+         --revision $REVISION_NAME_PRESUPUESTO
