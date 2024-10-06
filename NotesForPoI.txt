@@ -11,8 +11,8 @@
     $TopicNameArquitectura="arquitecturapubsub"
     $TopicNamePresupuesto="presupuestopubsub"
     $TopicNameFtp="ftppubsub"
-#   $TopicSubscriptionArquitectura="apiarquitectura-subscription" -> autodiscover by dapr
-#   $TopicSubscriptionPresupuesto="apipresupuesto-subscription" -> autodiscover by dapr
+#   $TopicSubscriptionArquitectura="apiarquitectura-subscription" -> AUTODISCOVER BY DAPR BECAUSE WE HAVE A SUBSCRIPTION DECLARATIVE 
+#   $TopicSubscriptionPresupuesto="apipresupuesto-subscription" -> AUTODISCOVER BY DAPR BECAUSE WE HAVE A SUBSCRIPTION DECLARATIVE
     $TopicSubscriptionFtp="ftp-subscription" -> CREATE IT IF WE DONT HAVE A SUBSCRIPTION DECLARATIVE (IN THE CODE)
 
 3. Deploy the DAPR components
