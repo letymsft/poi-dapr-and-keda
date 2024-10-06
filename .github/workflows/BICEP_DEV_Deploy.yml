@@ -15,7 +15,7 @@ jobs:
   Deploy_Baseline:
     uses: ./.github/workflows/Tempate_Bicep_IaC.yml
     with:
-        LOCATION: ${{ env.LOCATION }}
+        LOCATION: ${{ vars.LOCATION }}
         TEMPLATE_FILE: 'infra/csu_gh_adoption_main.bicep'
         PARAMETERS_FILE: 'infra/csu_gh_adoption_dev.json'
         KIND: 'create' #'create'
