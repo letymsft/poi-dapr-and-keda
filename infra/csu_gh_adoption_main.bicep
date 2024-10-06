@@ -276,13 +276,28 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
     }
     topics: [
       {
-        name: 'apiiniciativa'
+        name: 'arquitecturapubsub'
+        subscriptions: [
+          {
+            name: 'apiarquitectura-subscription'
+          }
+        ]
       }
       {
-        name: 'apiarquitectura'
+        name: 'presupuestopubsub'
+        subscriptions: [
+          {
+            name: 'apipresupuesto-subscription'
+          }
+        ]
       }
       {
-        name: 'apipresupuesto'
+        name: 'ftppubsub'
+        subscriptions: [
+          {
+            name: 'ftp-subscription'
+          }
+        ]
       }
     ]
     tags: tags
