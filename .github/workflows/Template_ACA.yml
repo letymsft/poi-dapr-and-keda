@@ -15,7 +15,6 @@ on:
       ACA_ENVIRONMENT:
         required: true
         type: string
-
        
 jobs:
   buildImage:

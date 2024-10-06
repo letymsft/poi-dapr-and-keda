@@ -2,8 +2,8 @@ componentType: pubsub.azure.servicebus
 version: v1
 metadata:
 - name: namespaceName
-  value: "sb-dapr-poc-4.servicebus.windows.net"
+  value: "CUSCSUDEVGHADOPSB.servicebus.windows.net"
 scopes:
-- apiiniciativa4
-- apiarquitectura4
-- apipresupuesto4
+- apiiniciativa
+- apiarquitectura
+- apipresupuesto
