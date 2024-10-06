@@ -1,7 +1,7 @@
 name: IAC PROD DEPLOYMENT
-env:
-  # Setting environment variables
-  NODE_ENV: production
+#env:
+#  # Setting environment variables
+#  NODE_ENV: production
 on:
   workflow_dispatch:
   push:

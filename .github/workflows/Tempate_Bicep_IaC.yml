@@ -26,6 +26,7 @@ jobs:
     steps:
     - name: Print all environment variables
       run: env
+      
     - name: Checkout repository
       uses: actions/checkout@v2
 

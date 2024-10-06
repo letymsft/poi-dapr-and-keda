@@ -1,47 +1,47 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "tokenReplacements": {
-        "value": [
-          {
-            "oldString": "__ENV__",
-            "newString": "PROD"
-          },
-          {
-            "oldString": "__LOC__",
-            "newString": "CUS"
-          }
-        ]
-      },
-      "tags": {
-        "value": {
-          "loc": "Central US",
-          "env": "DEV",
-          "owner": "CSU",
-          "project": "GHADOPTION"
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "tokenReplacements": {
+      "value": [
+        {
+          "oldString": "__ENV__",
+          "newString": "PROD"
+        },
+        {
+          "oldString": "__LOC__",
+          "newString": "CUS"
         }
-      },
-      "resourceGr": {
-        "value": {
-          "name":"__LOC__-CSU-__ENV__-GHADOP-RGP"
+      ]
+    },
+    "tags": {
+      "value": {
+        "loc": "Central US",
+        "env": "PROD",
+        "owner": "CSU",
+        "project": "DAPR&KEDEMO"
+      }
+    },
+    "resourceGr": {
+      "value": {
+        "name":"__LOC__-CSU-__ENV__-GHADOP-RGP"
+      }
+    },
+    "containerRegistry": {
+      "value": 
+        {
+          "name": "__LOC__CSU__ENV__GHADOPACR",
+          "acrSku": "Standard"
         }
-      },
-      "containerRegistry": {
-        "value": 
-          {
-            "name": "__LOC__CSU__ENV__GHADOPACR",
-            "acrSku": "Standard"
-          }
-      },
-      "workspace": {
-        "value": 
-          {
-            "name": "__LOC__CSU__ENV__-GHADOP-LAW"
-          }
-      },
-      "environment": {
-        "value": 
+    },
+    "workspace": {
+      "value": 
+        {
+          "name": "__LOC__CSU__ENV__-GHADOP-LAW"
+        }
+    },
+    "environment": {
+      "value": 
         {
           "name": "__LOC__CSU__ENV__-GHADOP-ENV",
           "workloadProfileName": "EnvProfile",
@@ -50,61 +50,130 @@
           "minimumCount": 1
 
         }
-      },
-      "identity": {
-        "value": 
+    },
+    "identity": {
+      "value": 
+        {
+          "name": "__LOC__CSU__ENV__-GHADOP-SP",
+          "principalType":"ServicePrincipal",
+          "roleDefinitionIdOrName":"7f951dda-4ed3-4680-a7ca-43fe172d538d"
+        }
+    },
+    "portal": {
+      "value": 
           {
-            "name": "__LOC__CSU__ENV__-GHADOP-SP",
-            "principalType":"ServicePrincipal",
-            "roleDefinitionIdOrName":"7f951dda-4ed3-4680-a7ca-43fe172d538d"
+              "name": "portal-net",
+              "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+              "cpu": "0.5",
+              "memory": "1.0Gi",
+              "ingressExternal": true,
+              "targetPort": 80,
+              "disableIngress": false,
+              "ingressTransport": "http",
+              "scaleMaxReplicas": 2,
+              "scaleMinReplicas": 1
           }
       },
-      "portal": {
+      "inventory": {
+        "value":
+          {
+              "name": "inventory-java-api",
+              "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+              "cpu": "0.5",
+              "memory": "1.0Gi",
+              "ingressExternal": true,
+              "targetPort": 80,
+              "disableIngress": false,
+              "ingressTransport": "http",
+              "scaleMaxReplicas": 2,
+              "scaleMinReplicas": 1
+          }
+      },
+      "product": {
+        "value":
+          {
+              "name": "product-python-api",
+              "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+              "cpu": "0.5",
+              "memory": "1.0Gi",
+              "ingressExternal": true,
+              "targetPort": 80,
+              "disableIngress": false,
+              "ingressTransport": "http",
+              "scaleMaxReplicas": 2,
+              "scaleMinReplicas": 1
+          }
+      },
+      "serviceBus": {
         "value": 
-            {
-                "name": "portal-net",
-                "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
-                "cpu": "0.5",
-                "memory": "1.0Gi",
-                "ingressExternal": true,
-                "targetPort": 80,
-                "disableIngress": false,
-                "ingressTransport": "http",
-                "scaleMaxReplicas": 2,
-                "scaleMinReplicas": 1
-            }
-        },
-        "inventory": {
-          "value":
-            {
-                "name": "inventory-java-api",
-                "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
-                "cpu": "0.5",
-                "memory": "1.0Gi",
-                "ingressExternal": true,
-                "targetPort": 8080,
-                "disableIngress": false,
-                "ingressTransport": "http",
-                "scaleMaxReplicas": 2,
-                "scaleMinReplicas": 1
-            }
-        },
-        "product": {
-          "value":
-            {
-                "name": "product-python-api",
-                "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
-                "cpu": "0.5",
-                "memory": "1.0Gi",
-                "ingressExternal": true,
-                "targetPort": 80,
-                "disableIngress": false,
-                "ingressTransport": "http",
-                "scaleMaxReplicas": 2,
-                "scaleMinReplicas": 1
-            }
-        
-        }
-      
-    }
+          {
+            "name": "__LOC__CSU__ENV__GHADOPSB",
+            "topics": [
+              {
+                "name": "arquitecturapubsub"
+              },
+              {
+                "name": "presupuestopubsub"
+              },
+              {
+                "name": "ftppubsub"
+              }
+            ]
+          }
+      },
+      "apiiniciativa": {
+        "value":
+          {
+              "name": "apiiniciativa",
+              "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+              "cpu": "0.5",
+              "memory": "1.0Gi",
+              "ingressExternal": true,
+              "targetPort": 8080,
+              "disableIngress": false,
+              "ingressTransport": "http",
+              "scaleMaxReplicas": 2,
+              "scaleMinReplicas": 1,
+              "daprEnabled": true,
+              "daprAppId": "apiiniciativa",
+              "daprAppPort": 8080
+          }
+      },
+      "apiarquitectura": {
+        "value":
+          {
+              "name": "apiarquitectura",
+              "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+              "cpu": "0.5",
+              "memory": "1.0Gi",
+              "ingressExternal": false,
+              "targetPort": 8080,
+              "disableIngress": true,
+              "ingressTransport": "http",
+              "scaleMaxReplicas": 2,
+              "scaleMinReplicas": 1,
+              "daprEnabled": true,
+              "daprAppId": "apiarquitectura",
+              "daprAppPort": 8080
+          }
+      },
+      "apipresupuesto": {
+        "value":
+          {
+              "name": "apipresupuesto",
+              "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+              "cpu": "0.5",
+              "memory": "1.0Gi",
+              "ingressExternal": false,
+              "targetPort": 8080,
+              "disableIngress": true,
+              "ingressTransport": "http",
+              "scaleMaxReplicas": 2,
+              "scaleMinReplicas": 1,
+              "daprEnabled": true,
+              "daprAppId": "apipresupuesto",
+              "daprAppPort": 8080
+          }
+      }
+  }
 }

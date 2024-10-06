@@ -1,8 +1,8 @@
 name: IAC DEV DEPLOYMENT
 
-env:
-  # Setting an environment variable with the value of a configuration variable
-  env_var: DEV
+#env:
+#  # Setting an environment variable with the value of a configuration variable
+#  env_var: DEV
 
 on:
   workflow_dispatch:
