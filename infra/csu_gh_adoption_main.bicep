@@ -33,6 +33,8 @@ param apiarquitectura object
 
 param apipresupuesto object
 
+var uniqueToken = toLower(take(uniqueString(subscription().id, environment.name, location), 5))
+
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
 
 func conditionalToLower(value string, valueToLower bool) string => valueToLower ? toLower(value) : value
@@ -48,7 +50,7 @@ var resourceGrName = replaceAll(resourceGr.name, tokenReplacements, false)
 
 //////////////////////////////////////////////////////////// MODULES ////////////////////////////////////////////////////////////
 module module_resourceGroup 'br/public:avm/res/resources/resource-group:0.2.4' = {
-  name: 'pid-rg-${replaceAll(resourceGr.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-rg-${replaceAll(resourceGr.name, tokenReplacements, false)}-${uniqueToken}'
   params: {
     name: replaceAll(resourceGr.name, tokenReplacements, false)
     location: location
@@ -57,7 +59,7 @@ module module_resourceGroup 'br/public:avm/res/resources/resource-group:0.2.4' =
 }
 
 module module_workspace 'br/public:avm/res/operational-insights/workspace:0.4.1' = {
-  name: 'pid-ws-${replaceAll(workspace.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-ws-${replaceAll(workspace.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     name: replaceAll(workspace.name, tokenReplacements, false)
@@ -70,7 +72,7 @@ module module_workspace 'br/public:avm/res/operational-insights/workspace:0.4.1'
 }
 
 module module_environment 'br/public:avm/res/app/managed-environment:0.5.2' = {
-  name: 'pid-en-${replaceAll(environment.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-en-${replaceAll(environment.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     name: replaceAll(environment.name, tokenReplacements, false)
@@ -94,7 +96,7 @@ module module_environment 'br/public:avm/res/app/managed-environment:0.5.2' = {
 }
 
 module module_userIdentity 'br/public:avm/res/managed-identity/user-assigned-identity:0.2.2' = {
-  name: 'pid-id-${replaceAll(identity.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-id-${replaceAll(identity.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     name: replaceAll(identity.name, tokenReplacements, false)
@@ -107,10 +109,10 @@ module module_userIdentity 'br/public:avm/res/managed-identity/user-assigned-ide
 }
 
 module module_containerregistry 'br/public:avm/res/container-registry/registry:0.3.2' = {
-  name: 'pid-cr-${replaceAll(containerRegistry.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-cr-${replaceAll(containerRegistry.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    name: '${replaceAll(containerRegistry.name, tokenReplacements, true)}${uniqueString(deployment().name)}'
+    name: '${replaceAll(containerRegistry.name, tokenReplacements, true)}${uniqueToken}'
     acrSku: containerRegistry.acrSku
     location: location
     tags: tags
@@ -129,7 +131,7 @@ module module_containerregistry 'br/public:avm/res/container-registry/registry:0
 }
 
 module containerAppInventory 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-inv-${replaceAll(inventory.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-inv-${replaceAll(inventory.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     // Required parameters
@@ -168,7 +170,7 @@ module containerAppInventory 'br/public:avm/res/app/container-app:0.7.0' = {
 }
 
 module containerAppProduct 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-prod-${replaceAll(product.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-prod-${replaceAll(product.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     // Required parameters
@@ -208,7 +210,7 @@ module containerAppProduct 'br/public:avm/res/app/container-app:0.7.0' = {
 
 
 module containerAppPortal 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-por-${replaceAll(portal.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-por-${replaceAll(portal.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     // Required parameters
@@ -262,7 +264,7 @@ module containerAppPortal 'br/public:avm/res/app/container-app:0.7.0' = {
 
 ////////////////////////////////////////Start infrastructure for DAPR & KEDA Demo////////////////////////////////////////
 module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
-  name: 'pid-sb-${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-sb-${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     name: replaceAll(serviceBus.name, tokenReplacements, false)
@@ -278,7 +280,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
 }
 
 module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-api-${replaceAll(apiiniciativa.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-api-${replaceAll(apiiniciativa.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     // Required parameters
@@ -323,7 +325,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
 }
 
 module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-api-${replaceAll(apiarquitectura.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-api-${replaceAll(apiarquitectura.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     // Required parameters
@@ -368,7 +370,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
 }
 
 module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-api-${replaceAll(apipresupuesto.name, tokenReplacements, false)}-${uniqueString(deployment().name)}'
+  name: 'pid-api-${replaceAll(apipresupuesto.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     // Required parameters
