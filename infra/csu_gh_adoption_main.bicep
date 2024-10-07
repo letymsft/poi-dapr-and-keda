@@ -275,10 +275,9 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
     skuObject: {
       name: 'Premium'
     }
-    managedIdentities: {
-      systemAssigned: false
-      userAssignedResourcesIds: [module_userIdentity.outputs.resourceId]
-    }
+    //managedIdentities: {
+    //  userAssignedResourcesIds: [module_userIdentity.outputs.resourceId]
+    //}
     topics: [
       {
         name: 'arquitecturapubsub'
