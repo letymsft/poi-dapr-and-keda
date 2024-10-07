@@ -298,21 +298,13 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
       {
         name: 'arquitecturapubsub'
         roleAssignments: []
-        subscriptions: [
-          {
-            name: 'apiarquitectura-subscription'
-          }
-        ]
+        subscriptions: []
         authorizationRules: []
       }
       {
         name: 'presupuestopubsub'
         roleAssignments: []
-        subscriptions: [
-          {
-            name: 'apipresupuesto-subscription'
-          }
-        ]
+        subscriptions: []
         authorizationRules: []
       }
       {
