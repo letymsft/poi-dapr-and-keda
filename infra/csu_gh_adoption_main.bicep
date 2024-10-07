@@ -265,7 +265,7 @@ module containerAppPortal 'br/public:avm/res/app/container-app:0.7.0' = {
 }
 
 ////////////////////////////////////////Start infrastructure for DAPR & KEDA Demo////////////////////////////////////////
-module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
+module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
   name: 'pid-sb-${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
