@@ -1,4 +1,7 @@
 name: Template IaC
+#env:
+#  # Setting an environment variable with the value of a configuration variable
+#  env_var: ${{ vars.ENV_CONTEXT_VAR }}
 
 on:
   workflow_call:
@@ -21,6 +24,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Print all environment variables
+      run: env
+
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -29,11 +35,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+
     - name: Azure Bicep Deployment
       id: bicep-deployment
       run: |
-        BICEP_DATA=$(az deployment sub ${{ inputs.KIND }} --name LOAD_TESTING_DEMO --location ${{ inputs.LOCATION }} --template-file ${{ inputs.TEMPLATE_FILE }} --parameters ${{ inputs.PARAMETERS_FILE }})
-
+        
+        BICEP_DATA=$(az deployment sub ${{ inputs.KIND }} --name "LOAD_TESTING_DEMO-$(openssl rand -hex 4)" --location ${{ inputs.LOCATION }} --template-file ${{ inputs.TEMPLATE_FILE }} --parameters ${{ inputs.PARAMETERS_FILE }})
+        
         delimiter="$(openssl rand -hex 8)"
         echo "summary<<${delimiter}" >> $GITHUB_OUTPUT
         echo "## Bicep ${{ inputs.KIND }} Output" >> $GITHUB_OUTPUT

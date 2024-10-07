@@ -2,16 +2,15 @@ name: IAC PROD DEPLOYMENT
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-    - infra/**
+      - infra/**
 jobs:
-
   Deploy_Baseline:
     uses: ./.github/workflows/Tempate_Bicep_IaC.yml
     with:
-        LOCATION: 'centralus'
-        TEMPLATE_FILE: 'infra/csu_gh_adoption_main.bicep'
-        PARAMETERS_FILE: 'infra/csu_gh_adoption_prod.json'
-        KIND: 'create'
+      LOCATION: ${{ vars.LOCATION }}
+      TEMPLATE_FILE: "infra/csu_gh_adoption_main.bicep"
+      PARAMETERS_FILE: "infra/csu_gh_adoption_prod.json"
+      KIND: "create"
     secrets: inherit
