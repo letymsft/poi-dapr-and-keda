@@ -6,7 +6,7 @@
         "value": [
           {
             "oldString": "__ENV__",
-            "newString": "DEV"
+            "newString": "DEV1"
           },
           {
             "oldString": "__LOC__",
@@ -17,7 +17,7 @@
       "tags": {
         "value": {
           "loc": "Central US",
-          "env": "DEV",
+          "env": "DEV1",
           "owner": "CSU",
           "project": "GHADOPTION"
         }
