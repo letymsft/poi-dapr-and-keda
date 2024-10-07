@@ -284,16 +284,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
             name: 'apiarquitectura-subscription'
           }
         ]
-        authorizationRules: [
-          {
-            name: 'RootManageSharedAccessKey'
-            rights: [
-              'Listen'
-              'Manage'
-              'Send'
-            ]
-          }
-        ]
+        authorizationRules: []
         
       }
       {
@@ -304,16 +295,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
             name: 'apipresupuesto-subscription'
           }
         ]
-        authorizationRules: [
-          {
-            name: 'RootManageSharedAccessKey'
-            rights: [
-              'Listen'
-              'Manage'
-              'Send'
-            ]
-          }
-        ]
+        authorizationRules: []
         
       }
       {
@@ -324,16 +306,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
             name: 'ftp-subscription'
           }
         ]
-        authorizationRules: [
-          {
-            name: 'RootManageSharedAccessKey'
-            rights: [
-              'Listen'
-              'Manage'
-              'Send'
-            ]
-          }
-        ]        
+        authorizationRules: []        
       }
     ]
   }
