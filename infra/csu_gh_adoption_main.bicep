@@ -282,17 +282,14 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
     }
     roleAssignments: [
       {
-        name: 'apiiniciativa-role-assignment'
         principalId: containerApiIniciativa.outputs.systemAssignedMIPrincipalId
         roleDefinitionIdOrName: 'Azure Service Bus Data Sender'
       }
       {
-        name: 'apiarquitectura-role-assignment'
         principalId: containerApiArquitectura.outputs.systemAssignedMIPrincipalId
         roleDefinitionIdOrName: 'Azure Service Bus Data Owner'
       }
       {
-        name: 'apipresupuesto-role-assignment'
         principalId: containerApiPresupuesto.outputs.systemAssignedMIPrincipalId
         roleDefinitionIdOrName: 'Azure Service Bus Data Owner'
       }
