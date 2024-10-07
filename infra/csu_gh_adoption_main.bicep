@@ -278,24 +278,12 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
     topics: [
       {
         name: 'arquitecturapubsub'
-        authorizationRules: [
-          {
-            name: 'RootManageSharedAccessKey'
-            rights: [
-              'Listen'
-              'Manage'
-              'Send'
-            ]
-          }
-        ]
+        roleAssignments: []
         subscriptions: [
           {
             name: 'apiarquitectura-subscription'
           }
         ]
-      }
-      {
-        name: 'presupuestopubsub'
         authorizationRules: [
           {
             name: 'RootManageSharedAccessKey'
@@ -306,14 +294,16 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
             ]
           }
         ]
+        
+      }
+      {
+        name: 'presupuestopubsub'
+        roleAssignments: []
         subscriptions: [
           {
             name: 'apipresupuesto-subscription'
           }
         ]
-      }
-      {
-        name: 'ftppubsub'
         authorizationRules: [
           {
             name: 'RootManageSharedAccessKey'
@@ -324,11 +314,26 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.1.0' = {
             ]
           }
         ]
+        
+      }
+      {
+        name: 'ftppubsub'
+        roleAssignments: []
         subscriptions: [
           {
             name: 'ftp-subscription'
           }
         ]
+        authorizationRules: [
+          {
+            name: 'RootManageSharedAccessKey'
+            rights: [
+              'Listen'
+              'Manage'
+              'Send'
+            ]
+          }
+        ]        
       }
     ]
   }
