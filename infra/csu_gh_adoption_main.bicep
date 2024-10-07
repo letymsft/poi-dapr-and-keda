@@ -271,10 +271,14 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
   params: {
     name: '${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueToken}'
     location: location
+    tags: tags
     skuObject: {
       name: 'Standard'
     }
-    tags: tags
+    managedIdentities: {
+      systemAssigned: true
+      userAssignedResourcesIds: [module_userIdentity.outputs.resourceId]
+    }
     topics: [
       {
         name: 'arquitecturapubsub'
@@ -285,7 +289,6 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
           }
         ]
         authorizationRules: []
-        
       }
       {
         name: 'presupuestopubsub'
@@ -296,7 +299,6 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
           }
         ]
         authorizationRules: []
-        
       }
       {
         name: 'ftppubsub'
@@ -306,7 +308,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
             name: 'ftp-subscription'
           }
         ]
-        authorizationRules: []        
+        authorizationRules: []
       }
     ]
   }
