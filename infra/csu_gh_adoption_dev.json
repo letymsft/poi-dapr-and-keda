@@ -6,7 +6,7 @@
         "value": [
           {
             "oldString": "__ENV__",
-            "newString": "DEV1"
+            "newString": "DEV"
           },
           {
             "oldString": "__LOC__",
