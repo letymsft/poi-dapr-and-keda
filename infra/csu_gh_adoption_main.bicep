@@ -35,6 +35,7 @@ param apipresupuesto object
 
 var uniqueToken = toLower(take(uniqueString(subscription().id, environment.name, location), 5))
 
+
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
 
 func conditionalToLower(value string, valueToLower bool) string => valueToLower ? toLower(value) : value
@@ -198,7 +199,9 @@ module containerAppProduct 'br/public:avm/res/app/container-app:0.7.0' = {
     scaleMaxReplicas: product.scaleMaxReplicas
     scaleMinReplicas: product.scaleMinReplicas
     tags: tags
-    managedIdentities: { userAssignedResourceIds: [module_userIdentity.outputs.resourceId] }
+    managedIdentities: {
+      userAssignedResourceIds: [module_userIdentity.outputs.resourceId]
+    }
     registries: [
       {
         identity: module_userIdentity.outputs.resourceId
@@ -251,7 +254,9 @@ module containerAppPortal 'br/public:avm/res/app/container-app:0.7.0' = {
     scaleMaxReplicas: portal.scaleMaxReplicas
     scaleMinReplicas: portal.scaleMinReplicas
     tags: tags
-    managedIdentities: { userAssignedResourceIds: [module_userIdentity.outputs.resourceId] }
+    managedIdentities: {
+      userAssignedResourceIds: [module_userIdentity.outputs.resourceId]
+    }
     registries: [
       {
         identity: module_userIdentity.outputs.resourceId
@@ -275,9 +280,23 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
     skuObject: {
       name: 'Premium'
     }
-    //managedIdentities: {
-    //  userAssignedResourcesIds: [module_userIdentity.outputs.resourceId]
-    //}
+    roleAssignments: [
+      {
+        name: 'apiiniciativa-role-assignment'
+        principalId: containerApiIniciativa.outputs.systemAssignedMIPrincipalId
+        roleDefinitionIdOrName: 'Azure Service Bus Data Sender'
+      }
+      {
+        name: 'apiarquitectura-role-assignment'
+        principalId: containerApiArquitectura.outputs.systemAssignedMIPrincipalId
+        roleDefinitionIdOrName: 'Azure Service Bus Data Owner'
+      }
+      {
+        name: 'apipresupuesto-role-assignment'
+        principalId: containerApiPresupuesto.outputs.systemAssignedMIPrincipalId
+        roleDefinitionIdOrName: 'Azure Service Bus Data Owner'
+      }
+    ]
     topics: [
       {
         name: 'arquitecturapubsub'
@@ -343,7 +362,10 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     scaleMaxReplicas: apiiniciativa.scaleMaxReplicas
     scaleMinReplicas: apiiniciativa.scaleMinReplicas
     tags: tags
-    managedIdentities: { userAssignedResourceIds: [module_userIdentity.outputs.resourceId] }
+    managedIdentities: {
+      systemAssigned: true
+      userAssignedResourceIds: [module_userIdentity.outputs.resourceId]
+    }
     dapr: {
       enabled: apiiniciativa.daprEnabled
       appId: apiiniciativa.daprAppId
@@ -388,7 +410,10 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     scaleMaxReplicas: apiarquitectura.scaleMaxReplicas
     scaleMinReplicas: apiarquitectura.scaleMinReplicas
     tags: tags
-    managedIdentities: { userAssignedResourceIds: [module_userIdentity.outputs.resourceId] }
+    managedIdentities: {
+      systemAssigned: true
+      userAssignedResourceIds: [module_userIdentity.outputs.resourceId]
+    }
     dapr: {
       enabled: apiarquitectura.daprEnabled
       appId: apiarquitectura.daprAppId
@@ -433,7 +458,10 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     scaleMaxReplicas: apipresupuesto.scaleMaxReplicas
     scaleMinReplicas: apipresupuesto.scaleMinReplicas
     tags: tags
-    managedIdentities: { userAssignedResourceIds: [module_userIdentity.outputs.resourceId] }
+    managedIdentities: {
+      systemAssigned: true
+      userAssignedResourceIds: [module_userIdentity.outputs.resourceId]
+    }
     dapr: {
       enabled: apipresupuesto.daprEnabled
       appId: apipresupuesto.daprAppId
@@ -451,4 +479,6 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     module_environment
   ]
 }
+
+
 /////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
