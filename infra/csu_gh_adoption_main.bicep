@@ -326,25 +326,4 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     module_environment
   ]
 }
-
-resource pubsubComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-06-01-preview' = {
-  name: 'pubsub-sandbox-servicebus'
-  parent: module_environment
-  properties: {
-    componentType: 'pubsub.azure.servicebus'
-    version: 'v1'
-    secrets: []
-    metadata: [
-      {
-        name: 'namespaceName'
-        value: '${serviceBus.name}.servicebus.windows.net'
-      }
-    ]
-    scopes: [
-      apiiniciativa.name
-      apiarquitectura.name
-      apipresupuesto.name
-    ]
-  }
-}
 /////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
