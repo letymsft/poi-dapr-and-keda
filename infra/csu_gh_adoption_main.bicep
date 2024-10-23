@@ -29,7 +29,6 @@ param apipresupuesto object
 
 var uniqueToken = toLower(take(uniqueString(subscription().id, environment.name, location), 5))
 
-
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
 
 func conditionalToLower(value string, valueToLower bool) string => valueToLower ? toLower(value) : value
@@ -330,12 +329,11 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
 
 resource pubsubComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-06-01-preview' = {
   name: 'pubsub-sandbox-servicebus'
-  parent: module_environment.name
+  parent: module_environment
   properties: {
     componentType: 'pubsub.azure.servicebus'
     version: 'v1'
-    secrets: [
-    ]
+    secrets: []
     metadata: [
       {
         name: 'namespaceName'
@@ -344,8 +342,8 @@ resource pubsubComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-
     ]
     scopes: [
       apiiniciativa.name
-          apiarquitectura.name
-          apipresupuesto.name
+      apiarquitectura.name
+      apipresupuesto.name
     ]
   }
 }
