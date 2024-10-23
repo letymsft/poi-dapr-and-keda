@@ -330,7 +330,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
 
 resource pubsubComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-06-01-preview' = {
   name: 'pubsub-sandbox-servicebus'
-  parent: module_environment
+  parent: module_environment.name
   properties: {
     componentType: 'pubsub.azure.servicebus'
     version: 'v1'
