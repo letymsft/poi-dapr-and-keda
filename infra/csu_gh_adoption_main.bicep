@@ -219,24 +219,6 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
       appId: apiiniciativa.daprAppId
       appProtocol: 'http'
       appPort: apiiniciativa.daprAppPort
-      components: [
-        {
-          name: 'pubsub-sandbox-servicebus'
-          type: 'pubsub.azure.servicebuss'
-          version: 'v1'
-          metadata: [
-            {
-              name: 'namespaceName'
-              value: '${serviceBus.name}.servicebus.windows.net'
-            }
-          ]
-          scopes: [
-            apiiniciativa.name
-            apiarquitectura.name
-            apipresupuesto.name
-          ]
-        }
-      ]
     }
     registries: [
       {
