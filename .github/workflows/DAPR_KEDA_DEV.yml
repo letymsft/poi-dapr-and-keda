@@ -32,7 +32,7 @@ jobs:
           --name $ENVIRONMENT \
           --resource-group ${{ vars.RESOURCE_GROUP }} \
           --dapr-component-name pubsub-sandbox-servicebus \
-          --yaml '$DAPR_YAML_FILE'
+          --yaml "${DAPR_YAML_FILE}"
 
 
   KEDA:
