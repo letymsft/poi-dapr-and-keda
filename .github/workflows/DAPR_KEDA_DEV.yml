@@ -81,6 +81,7 @@ jobs:
 
           # Get revision suffix 
           REVISION_SUFIX="$(echo "$REVISION_NAME" | awk -F'--' '{print $2}')"
+          REVISION_SUFIX="${{ github.run_number }}"
 
           echo "Revision Sufix: $REVISION_SUFIX"          
 
