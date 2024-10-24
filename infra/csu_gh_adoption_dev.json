@@ -129,14 +129,14 @@
                 "cpu": "0.5",
                 "memory": "1.0Gi",
                 "ingressExternal": true,
-                "targetPort": 8080,
+                "targetPort": 80,
                 "disableIngress": false,
                 "ingressTransport": "http",
                 "scaleMaxReplicas": 2,
                 "scaleMinReplicas": 1,
                 "daprEnabled": true,
                 "daprAppId": "apiiniciativa",
-                "daprAppPort": 8080
+                "daprAppPort": 80
             }
         },
         "apiarquitectura": {
@@ -147,14 +147,14 @@
                 "cpu": "0.5",
                 "memory": "1.0Gi",
                 "ingressExternal": false,
-                "targetPort": 8080,
+                "targetPort": 80,
                 "disableIngress": true,
                 "ingressTransport": "http",
                 "scaleMaxReplicas": 2,
                 "scaleMinReplicas": 1,
                 "daprEnabled": true,
                 "daprAppId": "apiarquitectura",
-                "daprAppPort": 8080
+                "daprAppPort": 80
             }
         },
         "apipresupuesto": {
@@ -165,14 +165,14 @@
                 "cpu": "0.5",
                 "memory": "1.0Gi",
                 "ingressExternal": false,
-                "targetPort": 8080,
+                "targetPort": 80,
                 "disableIngress": true,
                 "ingressTransport": "http",
                 "scaleMaxReplicas": 2,
                 "scaleMinReplicas": 1,
                 "daprEnabled": true,
                 "daprAppId": "apipresupuesto",
-                "daprAppPort": 8080
+                "daprAppPort": 80
             }
         }
     }
