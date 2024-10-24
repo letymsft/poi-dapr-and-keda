@@ -80,10 +80,10 @@ jobs:
           echo "Revision Name: $REVISION_NAME"
 
           # Get revision suffix for this example apiiniciativa--49pe41u where suffix is 49pe41u
-          REVISION_SUFIX="${REVISION_NAME##*--}" 
 
-          echo "Revision Sufix: $REVISION_SUFIX"    
-          
+          REVISION_SUFIX=$(echo "$REVISION_NAME" | tr -d '";' | awk -F'--' '{print $2}')  
+
+          echo "Revision Sufix: $REVISION_SUFIX"          
 
           # Update the container app with KEDA scale rule
           az containerapp update \
