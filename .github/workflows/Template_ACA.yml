@@ -45,7 +45,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: >
-            AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
+            AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
             az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest
   #load-testing:
   #  runs-on: ubuntu-latest

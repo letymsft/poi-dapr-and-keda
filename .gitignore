@@ -41,3 +41,5 @@ src/Store/obj/Debug/net6.0/Store.AssemblyInfo.cs
 **/bin/*
 **/obj/*
 
+**/.vs/*
+**/launchSettings.json
