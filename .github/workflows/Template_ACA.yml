@@ -19,7 +19,6 @@ on:
 jobs:
   buildImage:
    runs-on: ubuntu-latest
-   environment: ${{ inputs.ACA_ENVIRONMENT }}
    steps:
       - uses: actions/checkout@v4
       - name: Azure login
@@ -33,7 +32,6 @@ jobs:
           az acr build --image ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:${{ github.sha }} --registry ${AZURE_CONTAINER_REGISTRY} -g ${{ vars.RESOURCE_GROUP }} -f ${{ inputs.DOCKER_PATH }} ${{ inputs.DOCKER_BUILD_CONTEXT }}
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.ACA_ENVIRONMENT }}
     needs: [buildImage]
     steps:
       # Logs in with your Azure credentials
