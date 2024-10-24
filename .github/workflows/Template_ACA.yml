@@ -45,7 +45,7 @@ jobs:
         run: |
           AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           REVISION_SUFIX="${{ github.run_number }}"
-          echo "Revision Sufix: ${REVISION_SUFIX}
+          echo "Revision Sufix: ${REVISION_SUFIX}"
           az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest --revision-suffix ${REVISION_SUFIX}
 
           REVISION_NAME=$(az containerapp revision list \
