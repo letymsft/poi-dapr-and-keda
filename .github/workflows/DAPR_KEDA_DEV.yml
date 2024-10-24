@@ -28,10 +28,10 @@ jobs:
           cat $DAPR_YAML_FILE
 
 
-          az containerapp env dapr-component set `
-          --name $ENVIRONMENT `
-          --resource-group ${{ vars.RESOURCE_GROUP }} `
-          --dapr-component-name pubsub-sandbox-servicebus `
+          az containerapp env dapr-component set \
+          --name $ENVIRONMENT \
+          --resource-group ${{ vars.RESOURCE_GROUP }} \
+          --dapr-component-name pubsub-sandbox-servicebus \
           --yaml '$DAPR_YAML_FILE'
 
 
