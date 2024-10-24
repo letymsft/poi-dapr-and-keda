@@ -38,7 +38,7 @@ jobs:
     steps:
       # Logs in with your Azure credentials
       - name: Azure login
-        uses: azure/login@v2
+        uses: azure/login@v1
         with:
          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy Container Apps
@@ -49,16 +49,7 @@ jobs:
           echo "${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest"
           az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest --revision-suffix ${REVISION_SUFIX}
           
-          REVISION_NAME=$(az containerapp revision list \
-                         --name ${{ inputs.CONTAINER_NAME }}  \
-                         --resource-group ${{ vars.RESOURCE_GROUP }} \
-                         --query [0].name | tr -d '";')
-          echo "Revision Name: $REVISION_NAME"
-          #Restart the container app
-          az containerapp revision restart \
-          --resource-group ${{ vars.RESOURCE_GROUP }}  \
-          --name ${{ inputs.CONTAINER_NAME }}  \
-          --revision $REVISION_NAME
+
 
   #load-testing:
   #  runs-on: ubuntu-latest

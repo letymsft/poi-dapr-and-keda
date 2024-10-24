@@ -57,20 +57,18 @@ jobs:
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           echo "Service Bus Namespace Name: $SERVICE_BUS_NAMESPACE_NAME" 
 
-
-
           SERVICE_BUS_CONNECTION_STRING=$(az servicebus namespace authorization-rule keys list \
-          --name RootManageSharedAccessKey \
-          --resource-group ${{ vars.RESOURCE_GROUP }} \
-          --namespace-name $SERVICE_BUS_NAMESPACE_NAME \
-          --query primaryConnectionString \
-          --output tsv)
+            --name RootManageSharedAccessKey \
+            --resource-group ${{ vars.RESOURCE_GROUP }} \
+            --namespace-name $SERVICE_BUS_NAMESPACE_NAME \
+            --query primaryConnectionString \
+            --output tsv)
 
           # Create a new secret named 'svcbus-connstring' in backend processer container app
           az containerapp secret set \
-          --name $BACKEND_SERVICE_NAME \
-          --resource-group ${{ vars.RESOURCE_GROUP }} \
-          --secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
+            --name $BACKEND_SERVICE_NAME \
+            --resource-group ${{ vars.RESOURCE_GROUP }} \
+            --secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
 
           REVISION_NAME=$(az containerapp revision list \
                            --name $BACKEND_SERVICE_NAME  \
