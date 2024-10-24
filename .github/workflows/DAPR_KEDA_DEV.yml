@@ -76,14 +76,20 @@ jobs:
                            --name $BACKEND_SERVICE_NAME  \
                            --resource-group ${{ vars.RESOURCE_GROUP }} \
                            --query [0].name)
-          
+
           echo "Revision Name: $REVISION_NAME"
+
+          # Get revision suffix for this example apiiniciativa--49pe41u where suffix is 49pe41u
+          REVISION_SUFIX="${REVISION_NAME##*--}" 
+
+          echo "Revision Sufix: $REVISION_SUFIX"    
+          
 
           # Update the container app with KEDA scale rule
           az containerapp update \
             --name $BACKEND_SERVICE_NAME \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
-            --revision $REVISION_NAME \
+            --revision-suffix $REVISION_SUFIX \
             --min-replicas $MIN_REPLICAS \
             --max-replicas $MAX_REPLICAS \
             --scale-rule-name "topic-msgs-length" \
