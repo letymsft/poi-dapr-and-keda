@@ -75,7 +75,7 @@ jobs:
           REVISION_NAME=$(az containerapp revision list \
                            --name $BACKEND_SERVICE_NAME  \
                            --resource-group ${{ vars.RESOURCE_GROUP }} \
-                           --query [0].name)
+                           --query [0].name | tr -d '";')
 
           echo "Revision Name: $REVISION_NAME"
 
@@ -87,6 +87,7 @@ jobs:
           # Update the container app with KEDA scale rule
           az containerapp update \
             --name $BACKEND_SERVICE_NAME \
+            --revision-suffix $REVISION_SUFIX \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
             --min-replicas $MIN_REPLICAS \
             --max-replicas $MAX_REPLICAS \
@@ -100,7 +101,6 @@ jobs:
                                 "connectionFromEnv=svcbus-connstring"
           
           #Restart the container app
-
           az containerapp revision restart \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
             --name $BACKEND_SERVICE_NAME  \
