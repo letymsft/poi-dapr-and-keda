@@ -42,27 +42,23 @@ jobs:
         with:
          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy Container Apps
-        uses: azure/CLI@v1
-        with:
-          inlineScript: >
-            AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
-            REVISION_SUFIX="${{ github.run_number }}"
-            echo "Revision Sufix: ${REVISION_SUFIX}
-            echo "${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest"
-            az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest --revision-suffix ${REVISION_SUFIX}
-            
-            REVISION_NAME=$(az containerapp revision list \
-                           --name $BACKEND_SERVICE_NAME  \
-                           --resource-group ${{ vars.RESOURCE_GROUP }} \
-                           --query [0].name | tr -d '";')
-
-            echo "Revision Name: $REVISION_NAME"
-
-            #Restart the container app
-            az containerapp revision restart \
-            --resource-group ${{ vars.RESOURCE_GROUP }}  \
-            --name ${{ inputs.CONTAINER_NAME }}  \
-            --revision $REVISION_NAME
+        run: |
+          AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
+          REVISION_SUFIX="${{ github.run_number }}"
+          echo "Revision Sufix: ${REVISION_SUFIX}
+          echo "${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest"
+          az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest --revision-suffix ${REVISION_SUFIX}
+          
+          REVISION_NAME=$(az containerapp revision list \
+                         --name ${{ inputs.CONTAINER_NAME }}  \
+                         --resource-group ${{ vars.RESOURCE_GROUP }} \
+                         --query [0].name | tr -d '";')
+          echo "Revision Name: $REVISION_NAME"
+          #Restart the container app
+          az containerapp revision restart \
+          --resource-group ${{ vars.RESOURCE_GROUP }}  \
+          --name ${{ inputs.CONTAINER_NAME }}  \
+          --revision $REVISION_NAME
 
   #load-testing:
   #  runs-on: ubuntu-latest
