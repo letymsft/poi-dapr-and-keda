@@ -202,7 +202,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apiiniciativa.name
     location: location
     ingressExternal: apiiniciativa.ingressExternal
-    ingressTargetPort: apiiniciativa.targetPort //8080
+    ingressTargetPort: apiiniciativa.targetPort //80
     disableIngress: apiiniciativa.disableIngress //false
     ingressTransport: apiiniciativa.ingressTransport //'http'
     workloadProfileName: environment.workloadProfileName
@@ -250,7 +250,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apiarquitectura.name
     location: location
     ingressExternal: apiarquitectura.ingressExternal
-    ingressTargetPort: apiarquitectura.targetPort //8080
+    ingressTargetPort: apiarquitectura.targetPort //80
     disableIngress: apiarquitectura.disableIngress //false
     ingressTransport: apiarquitectura.ingressTransport //'http'
     workloadProfileName: environment.workloadProfileName
@@ -298,7 +298,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apipresupuesto.name
     location: location
     ingressExternal: apipresupuesto.ingressExternal
-    ingressTargetPort: apipresupuesto.targetPort //8080
+    ingressTargetPort: apipresupuesto.targetPort //80
     disableIngress: apipresupuesto.disableIngress //false
     ingressTransport: apipresupuesto.ingressTransport //'http'
     workloadProfileName: environment.workloadProfileName
