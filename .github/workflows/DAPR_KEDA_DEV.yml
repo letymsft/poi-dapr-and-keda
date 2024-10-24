@@ -88,7 +88,6 @@ jobs:
           az containerapp update \
             --name $BACKEND_SERVICE_NAME \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
-            --revision-suffix $REVISION_SUFIX \
             --min-replicas $MIN_REPLICAS \
             --max-replicas $MAX_REPLICAS \
             --scale-rule-name "topic-msgs-length" \
@@ -100,7 +99,7 @@ jobs:
                                 "messageCount=$MESSAGE_COUNT" \
                                 "connectionFromEnv=svcbus-connstring"
           
-          #Restart the container app
+          #Restart the container app  --revision-suffix $REVISION_SUFIX \
 
           az containerapp revision restart \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
