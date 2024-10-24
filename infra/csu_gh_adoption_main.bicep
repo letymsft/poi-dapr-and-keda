@@ -162,7 +162,11 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
       {
         name: 'presupuestopubsub'
         roleAssignments: []
-        subscriptions: []
+        subscriptions: [
+          {
+            name: 'apiiniciativa'
+          }
+        ]
         authorizationRules: []
       }
       {
