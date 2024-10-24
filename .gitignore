@@ -35,8 +35,11 @@ src/Python.Store.ProductApi/*.temp
 src/Monitoring/obj*
 src/Monitoring/bin/
 src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfo.cs
-src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfo.cs
-src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfo.cs
 src/Monitoring/obj/Debug/net6.0/Monitoring.AssemblyInfoInputs.cache
 src/Store/obj/Debug/net6.0/Store.AssemblyInfo.cs
-src/Store/obj/Debug/net6.0/Store.AssemblyInfo.cs
+*.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+**/bin/*
+**/obj/*
+
+**/.vs/*
+**/launchSettings.json
