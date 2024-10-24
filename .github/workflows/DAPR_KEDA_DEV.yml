@@ -79,9 +79,8 @@ jobs:
 
           echo "Revision Name: $REVISION_NAME"
 
-          # Get revision suffix for this example apiiniciativa--49pe41u where suffix is 49pe41u
-
-          REVISION_SUFIX=$(echo "$REVISION_NAME" | tr -d '";' | awk -F'--' '{print $2}')  
+          # Get revision suffix 
+          REVISION_SUFIX="$(echo "$REVISION_NAME" | tr -d '";' | awk -F'--' '{print $2}')"
 
           echo "Revision Sufix: $REVISION_SUFIX"          
 
