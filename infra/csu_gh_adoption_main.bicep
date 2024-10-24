@@ -190,7 +190,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     // Required parameters
     containers: [
       {
-        image: '${module_containerregistry.name}.azurecr.io/${apiiniciativa.name}:latest'
+        image: 'cuscsudevghadopacr7zxiy.azurecr.io/apiiniciativa:latest'
         name: apiiniciativa.name //'apiiniciativa'
         resources: {
           cpu: apiiniciativa.cpu //'1'
