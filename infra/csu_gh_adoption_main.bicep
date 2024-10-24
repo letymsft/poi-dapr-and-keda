@@ -190,7 +190,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     // Required parameters
     containers: [
       {
-        image: 'cuscsudevghadopacr7zxiy.azurecr.io/apiiniciativa:latest'
+        image: apiiniciativa.image
         name: apiiniciativa.name //'apiiniciativa'
         resources: {
           cpu: apiiniciativa.cpu //'1'
@@ -239,7 +239,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     // Required parameters
     containers: [
       {
-        image: '${module_containerregistry.outputs.loginServer}/${apiarquitectura.name}:latest'
+        image: apiarquitectura.image
         name: apiarquitectura.name //'apiarquitectura'
         resources: {
           cpu: apiarquitectura.cpu //'1'
@@ -288,7 +288,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     // Required parameters
     containers: [
       {
-        image: '${module_containerregistry.outputs.loginServer}/${apipresupuesto.name}:latest'
+        image: apipresupuesto.image
         name: apipresupuesto.name //'apipresupuesto'
         resources: {
           cpu: apipresupuesto.cpu //'1'
