@@ -14,7 +14,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Enable KEDA Scale Rule
         run: |
-          DAPR_YAML_FILE='src/KEDA.DAPR.Demo/src/components/pubsub-sandbox-servicebus.yaml'
+          DAPR_YAML_FILE='./src/KEDA.DAPR.Demo/src/components/pubsub-sandbox-servicebus.yaml'
           #Get container App Environtment name:
           ENVIRONMENT=$(az containerapp env list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           #Get Service Bus Namespace Name:
