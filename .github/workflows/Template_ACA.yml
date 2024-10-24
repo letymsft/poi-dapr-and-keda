@@ -59,7 +59,7 @@ jobs:
             az containerapp revision restart \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
             --name ${{ inputs.CONTAINER_NAME }}  \
-            --revision "${{ inputs.CONTAINER_NAME }}--$GITHUB_RUN_NUMBER"
+            --revision "${{ inputs.CONTAINER_NAME }}--${{ github.run_number }}"
 
   #load-testing:
   #  runs-on: ubuntu-latest
