@@ -73,7 +73,7 @@
     "apiiniciativa": {
       "value": {
         "name": "apiiniciativa",
-        "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+        "image": "apiiniciativa:latest",
         "cpu": "0.5",
         "memory": "1.0Gi",
         "ingressExternal": true,
@@ -90,7 +90,7 @@
     "apiarquitectura": {
       "value": {
         "name": "apiarquitectura",
-        "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+        "image": "apiarquitectura:latest",
         "cpu": "0.5",
         "memory": "1.0Gi",
         "ingressExternal": false,
@@ -107,7 +107,7 @@
     "apipresupuesto": {
       "value": {
         "name": "apipresupuesto",
-        "image": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+        "image": "apipresupuesto:latest",
         "cpu": "0.5",
         "memory": "1.0Gi",
         "ingressExternal": false,
