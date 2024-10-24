@@ -27,7 +27,7 @@ jobs:
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           echo "Service Bus Namespace Name: $SERVICE_BUS_NAMESPACE_NAME" 
 
-          $SERVICE_BUS_CONNECTION_STRING=$(az servicebus namespace authorization-rule keys list \
+          SERVICE_BUS_CONNECTION_STRING=$(az servicebus namespace authorization-rule keys list \
           --name RootManageSharedAccessKey \
           --resource-group ${{ vars.RESOURCE_GROUP }} \
           --namespace-name $SERVICE_BUS_NAMESPACE_NAME \
