@@ -27,32 +27,32 @@ jobs:
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           echo "Service Bus Namespace Name: $SERVICE_BUS_NAMESPACE_NAME" 
 
-          $SERVICE_BUS_CONNECTION_STRING = az servicebus namespace authorization-rule keys list `
-          --name RootManageSharedAccessKey `
-          --resource-group ${{ vars.RESOURCE_GROUP }} `
-          --namespace-name $SERVICE_BUS_NAMESPACE_NAME `
-          --query primaryConnectionString `
+          $SERVICE_BUS_CONNECTION_STRING = az servicebus namespace authorization-rule keys list \
+          --name RootManageSharedAccessKey \
+          --resource-group ${{ vars.RESOURCE_GROUP }} \
+          --namespace-name $SERVICE_BUS_NAMESPACE_NAME \
+          --query primaryConnectionString \
           --output tsv
 
           echo "Service Bus Connection String: $SERVICE_BUS_CONNECTION_STRING"
 
           # Create a new secret named 'svcbus-connstring' in backend processer container app
-          az containerapp secret set `
-          --name $BACKEND_SERVICE_NAME `
-          --resource-group ${{ vars.RESOURCE_GROUP }} `
+          az containerapp secret set \
+          --name $BACKEND_SERVICE_NAME \
+          --resource-group ${{ vars.RESOURCE_GROUP }} \
           --secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
 
           # Update the container app with KEDA scale rule
-          az containerapp update `
-            --name $BACKEND_SERVICE_NAME `
-            --resource-group ${{ vars.RESOURCE_GROUP }}  `
-            --min-replicas $MIN_REPLICAS `
-            --max-replicas $MAX_REPLICAS `
-            --scale-rule-name "topic-msgs-length" `
-            --scale-rule-type "azure-servicebus" `
-            --scale-rule-auth "connection=svcbus-connstring" `
-            --scale-rule-metadata "topicName=$TOPIC_NAME" `
-                                "subscriptionName=$SUBSCRIPTION_NAME" `
-                                "namespace=$SERVICE_BUS_NAMESPACE_NAME" `
-                                "messageCount=$MESSAGE_COUNT" `
+          az containerapp update \
+            --name $BACKEND_SERVICE_NAME \
+            --resource-group ${{ vars.RESOURCE_GROUP }}  \
+            --min-replicas $MIN_REPLICAS \
+            --max-replicas $MAX_REPLICAS \
+            --scale-rule-name "topic-msgs-length" \
+            --scale-rule-type "azure-servicebus" \
+            --scale-rule-auth "connection=svcbus-connstring" \
+            --scale-rule-metadata "topicName=$TOPIC_NAME" \
+                                "subscriptionName=$SUBSCRIPTION_NAME" \
+                                "namespace=$SERVICE_BUS_NAMESPACE_NAME" \
+                                "messageCount=$MESSAGE_COUNT" \
                                 "connectionFromEnv=svcbus-connstring"
