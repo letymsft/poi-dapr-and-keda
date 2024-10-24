@@ -19,12 +19,6 @@ param identity object
 
 param tags object
 
-param inventory object
-
-param product object
-
-param portal object
-
 param serviceBus object
 
 param apiiniciativa object
@@ -34,7 +28,6 @@ param apiarquitectura object
 param apipresupuesto object
 
 var uniqueToken = toLower(take(uniqueString(subscription().id, environment.name, location), 5))
-
 
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
 
@@ -134,141 +127,6 @@ module module_containerregistry 'br/public:avm/res/container-registry/registry:0
   ]
 }
 
-module containerAppInventory 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-inv-${replaceAll(inventory.name, tokenReplacements, false)}-${uniqueToken}'
-  scope: resourceGroup(resourceGrName)
-  params: {
-    // Required parameters
-    containers: [
-      {
-        image: inventory.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
-        name: inventory.name //'simple-hello-world-container'
-        resources: {
-          cpu: inventory.cpu //'1'
-          memory: inventory.memory //0.5Gi'
-        }
-      }
-    ]
-    environmentResourceId: module_environment.outputs.resourceId
-    name: inventory.name
-    location: location
-    ingressExternal: inventory.ingressExternal
-    ingressTargetPort: inventory.targetPort //8080
-    disableIngress: inventory.disableIngress //false
-    ingressTransport: inventory.ingressTransport //'http'
-    workloadProfileName: environment.workloadProfileName
-    scaleMaxReplicas: inventory.scaleMaxReplicas
-    scaleMinReplicas: inventory.scaleMinReplicas
-    tags: tags
-    managedIdentities: { userAssignedResourceIds: [module_userIdentity.outputs.resourceId] }
-    registries: [
-      {
-        identity: module_userIdentity.outputs.resourceId
-        server: module_containerregistry.outputs.loginServer
-      }
-    ]
-  }
-  dependsOn: [
-    module_environment
-  ]
-}
-
-module containerAppProduct 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-prod-${replaceAll(product.name, tokenReplacements, false)}-${uniqueToken}'
-  scope: resourceGroup(resourceGrName)
-  params: {
-    // Required parameters
-    containers: [
-      {
-        image: product.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
-        name: product.name //'simple-hello-world-container'
-        resources: {
-          cpu: product.cpu //'1'
-          memory: product.memory //0.5Gi'
-        }
-      }
-    ]
-    environmentResourceId: module_environment.outputs.resourceId
-    name: product.name
-    location: location
-    ingressExternal: product.ingressExternal
-    ingressTargetPort: product.targetPort //8080
-    disableIngress: product.disableIngress //false
-    ingressTransport: product.ingressTransport //'http'
-    workloadProfileName: environment.workloadProfileName
-    scaleMaxReplicas: product.scaleMaxReplicas
-    scaleMinReplicas: product.scaleMinReplicas
-    tags: tags
-    managedIdentities: {
-      userAssignedResourceIds: [module_userIdentity.outputs.resourceId]
-    }
-    registries: [
-      {
-        identity: module_userIdentity.outputs.resourceId
-        server: module_containerregistry.outputs.loginServer
-      }
-    ]
-  }
-  dependsOn: [
-    module_environment
-  ]
-}
-
-module containerAppPortal 'br/public:avm/res/app/container-app:0.7.0' = {
-  name: 'pid-por-${replaceAll(portal.name, tokenReplacements, false)}-${uniqueToken}'
-  scope: resourceGroup(resourceGrName)
-  params: {
-    // Required parameters
-    containers: [
-      {
-        image: portal.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
-        name: portal.name //'simple-hello-world-container'
-        resources: {
-          cpu: portal.cpu //'1'
-          memory: portal.memory //0.5Gi'
-        }
-        env: [
-          {
-            name: 'InventoryApi'
-            value: 'https://${containerAppInventory.outputs.fqdn}'
-          }
-          {
-            name: 'ProductsApi'
-            value: 'https://${containerAppProduct.outputs.fqdn}'
-          }
-          {
-            name: 'ASPNETCORE_ENVIRONMENT'
-            value: 'Development'
-          }
-        ]
-      }
-    ]
-    environmentResourceId: module_environment.outputs.resourceId
-    name: portal.name
-    location: location
-    ingressExternal: portal.ingressExternal
-    ingressTargetPort: portal.targetPort //8080
-    disableIngress: portal.disableIngress //false
-    ingressTransport: portal.ingressTransport //'http'
-    workloadProfileName: environment.workloadProfileName
-    scaleMaxReplicas: portal.scaleMaxReplicas
-    scaleMinReplicas: portal.scaleMinReplicas
-    tags: tags
-    managedIdentities: {
-      userAssignedResourceIds: [module_userIdentity.outputs.resourceId]
-    }
-    registries: [
-      {
-        identity: module_userIdentity.outputs.resourceId
-        server: module_containerregistry.outputs.loginServer
-      }
-    ]
-  }
-  dependsOn: [
-    module_environment
-  ]
-}
-
 ////////////////////////////////////////Start infrastructure for DAPR & KEDA Demo////////////////////////////////////////
 module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
   name: 'pid-sb-${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueToken}'
@@ -344,7 +202,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apiiniciativa.name
     location: location
     ingressExternal: apiiniciativa.ingressExternal
-    ingressTargetPort: apiiniciativa.targetPort //8080
+    ingressTargetPort: apiiniciativa.targetPort //80
     disableIngress: apiiniciativa.disableIngress //false
     ingressTransport: apiiniciativa.ingressTransport //'http'
     workloadProfileName: environment.workloadProfileName
@@ -392,7 +250,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apiarquitectura.name
     location: location
     ingressExternal: apiarquitectura.ingressExternal
-    ingressTargetPort: apiarquitectura.targetPort //8080
+    ingressTargetPort: apiarquitectura.targetPort //80
     disableIngress: apiarquitectura.disableIngress //false
     ingressTransport: apiarquitectura.ingressTransport //'http'
     workloadProfileName: environment.workloadProfileName
@@ -440,7 +298,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apipresupuesto.name
     location: location
     ingressExternal: apipresupuesto.ingressExternal
-    ingressTargetPort: apipresupuesto.targetPort //8080
+    ingressTargetPort: apipresupuesto.targetPort //80
     disableIngress: apipresupuesto.disableIngress //false
     ingressTransport: apipresupuesto.ingressTransport //'http'
     workloadProfileName: environment.workloadProfileName
@@ -468,6 +326,4 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     module_environment
   ]
 }
-
-
 /////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
