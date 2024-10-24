@@ -66,8 +66,6 @@ jobs:
           --query primaryConnectionString \
           --output tsv)
 
-          echo "Service Bus Connection String: $SERVICE_BUS_CONNECTION_STRING"
-
           # Create a new secret named 'svcbus-connstring' in backend processer container app
           az containerapp secret set \
           --name $BACKEND_SERVICE_NAME \
