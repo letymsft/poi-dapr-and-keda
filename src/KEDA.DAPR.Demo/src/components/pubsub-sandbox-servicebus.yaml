@@ -2,7 +2,7 @@ componentType: pubsub.azure.servicebus
 version: v1
 metadata:
 - name: namespaceName
-  value: "CUSCSUDEVGHADOPSB-7zxiy.servicebus.windows.net"
+  value: "#{SERVICE_BUS_NAMESPACE}#.servicebus.windows.net"
 scopes:
 - apiiniciativa
 - apiarquitectura
