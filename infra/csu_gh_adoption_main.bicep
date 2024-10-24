@@ -187,14 +187,13 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
   name: 'pid-api-${replaceAll(apiiniciativa.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    // Required parameters
     containers: [
       {
         image: apiiniciativa.image
-        name: apiiniciativa.name //'apiiniciativa'
+        name: apiiniciativa.name
         resources: {
-          cpu: apiiniciativa.cpu //'1'
-          memory: apiiniciativa.memory //0.5Gi'
+          cpu: apiiniciativa.cpu
+          memory: apiiniciativa.memory
         }
       }
     ]
@@ -202,9 +201,9 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apiiniciativa.name
     location: location
     ingressExternal: apiiniciativa.ingressExternal
-    ingressTargetPort: apiiniciativa.targetPort //80
-    disableIngress: apiiniciativa.disableIngress //false
-    ingressTransport: apiiniciativa.ingressTransport //'http'
+    ingressTargetPort: apiiniciativa.targetPort
+    disableIngress: apiiniciativa.disableIngress
+    ingressTransport: apiiniciativa.ingressTransport
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apiiniciativa.scaleMaxReplicas
     scaleMinReplicas: apiiniciativa.scaleMinReplicas
@@ -236,14 +235,13 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
   name: 'pid-api-${replaceAll(apiarquitectura.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    // Required parameters
     containers: [
       {
         image: apiarquitectura.image
-        name: apiarquitectura.name //'apiarquitectura'
+        name: apiarquitectura.name
         resources: {
-          cpu: apiarquitectura.cpu //'1'
-          memory: apiarquitectura.memory //0.5Gi'
+          cpu: apiarquitectura.cpu
+          memory: apiarquitectura.memory
         }
       }
     ]
@@ -251,9 +249,9 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apiarquitectura.name
     location: location
     ingressExternal: apiarquitectura.ingressExternal
-    ingressTargetPort: apiarquitectura.targetPort //80
-    disableIngress: apiarquitectura.disableIngress //false
-    ingressTransport: apiarquitectura.ingressTransport //'http'
+    ingressTargetPort: apiarquitectura.targetPort
+    disableIngress: apiarquitectura.disableIngress
+    ingressTransport: apiarquitectura.ingressTransport
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apiarquitectura.scaleMaxReplicas
     scaleMinReplicas: apiarquitectura.scaleMinReplicas
@@ -285,14 +283,13 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
   name: 'pid-api-${replaceAll(apipresupuesto.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    // Required parameters
     containers: [
       {
         image: apipresupuesto.image
-        name: apipresupuesto.name //'apipresupuesto'
+        name: apipresupuesto.name
         resources: {
-          cpu: apipresupuesto.cpu //'1'
-          memory: apipresupuesto.memory //0.5Gi'
+          cpu: apipresupuesto.cpu
+          memory: apipresupuesto.memory
         }
       }
     ]
@@ -300,9 +297,9 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apipresupuesto.name
     location: location
     ingressExternal: apipresupuesto.ingressExternal
-    ingressTargetPort: apipresupuesto.targetPort //80
-    disableIngress: apipresupuesto.disableIngress //false
-    ingressTransport: apipresupuesto.ingressTransport //'http'
+    ingressTargetPort: apipresupuesto.targetPort
+    disableIngress: apipresupuesto.disableIngress
+    ingressTransport: apipresupuesto.ingressTransport
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apipresupuesto.scaleMaxReplicas
     scaleMinReplicas: apipresupuesto.scaleMinReplicas
