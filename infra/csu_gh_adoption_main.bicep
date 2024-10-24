@@ -239,7 +239,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     // Required parameters
     containers: [
       {
-        image: '${module_containerregistry.name}.azurecr.io/${apiarquitectura.name}:latest'
+        image: '${module_containerregistry.outputs.loginServer}/${apiarquitectura.name}:latest'
         name: apiarquitectura.name //'apiarquitectura'
         resources: {
           cpu: apiarquitectura.cpu //'1'
@@ -288,7 +288,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     // Required parameters
     containers: [
       {
-        image: '${module_containerregistry.name}.azurecr.io/${apipresupuesto.name}:latest'
+        image: '${module_containerregistry.outputs.loginServer}/${apipresupuesto.name}:latest'
         name: apipresupuesto.name //'apipresupuesto'
         resources: {
           cpu: apipresupuesto.cpu //'1'
