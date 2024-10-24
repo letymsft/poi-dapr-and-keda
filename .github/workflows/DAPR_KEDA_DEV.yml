@@ -88,7 +88,6 @@ jobs:
           az containerapp update \
             --name $BACKEND_SERVICE_NAME \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
-            --revision-suffix 49pe41u \
             --min-replicas $MIN_REPLICAS \
             --max-replicas $MAX_REPLICAS \
             --scale-rule-name "topic-msgs-length" \
