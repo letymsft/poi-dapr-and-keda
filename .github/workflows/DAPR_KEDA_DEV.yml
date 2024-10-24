@@ -74,7 +74,7 @@ jobs:
 
           REVISION_NAME=$(az containerapp revision list \
                            --name $BACKEND_SERVICE_NAME  \
-                           --resource-group $RESOURCE_GROUP \
+                           --resource-group ${{ vars.RESOURCE_GROUP }} \
                            --query [0].name)
           
           echo "Revision Name: $REVISION_NAME"
