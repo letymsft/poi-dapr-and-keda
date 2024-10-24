@@ -80,8 +80,8 @@
         "targetPort": 80,
         "disableIngress": false,
         "ingressTransport": "http",
-        "scaleMaxReplicas": 1,
-        "scaleMinReplicas": 0,
+        "scaleMaxReplicas": 2,
+        "scaleMinReplicas": 1,
         "daprEnabled": true,
         "daprAppId": "apiiniciativa",
         "daprAppPort": 80
@@ -97,8 +97,8 @@
         "targetPort": 80,
         "disableIngress": true,
         "ingressTransport": "http",
-        "scaleMaxReplicas": 1,
-        "scaleMinReplicas": 0,
+        "scaleMaxReplicas": 2,
+        "scaleMinReplicas": 1,
         "daprEnabled": true,
         "daprAppId": "apiarquitectura",
         "daprAppPort": 80
@@ -114,8 +114,8 @@
         "targetPort": 80,
         "disableIngress": true,
         "ingressTransport": "http",
-        "scaleMaxReplicas": 1,
-        "scaleMinReplicas": 0,
+        "scaleMaxReplicas": 2,
+        "scaleMinReplicas": 1,
         "daprEnabled": true,
         "daprAppId": "apipresupuesto",
         "daprAppPort": 80

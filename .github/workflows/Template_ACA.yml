@@ -30,7 +30,7 @@ jobs:
       - name: Build and push image to ACR
         run: |
           AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
-          az acr build --image ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest --registry ${AZURE_CONTAINER_REGISTRY} -g ${{ vars.RESOURCE_GROUP }} -f ${{ inputs.DOCKER_PATH }} ${{ inputs.DOCKER_BUILD_CONTEXT }}
+          az acr build --image ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:${{ github.sha }} --registry ${AZURE_CONTAINER_REGISTRY} -g ${{ vars.RESOURCE_GROUP }} -f ${{ inputs.DOCKER_PATH }} ${{ inputs.DOCKER_BUILD_CONTEXT }}
   deploy:
     runs-on: ubuntu-latest
     environment: ${{ inputs.ACA_ENVIRONMENT }}
@@ -46,7 +46,7 @@ jobs:
         with:
           inlineScript: >
             AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
-            az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:latest
+            az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:${{ github.sha }}
   #load-testing:
   #  runs-on: ubuntu-latest
   #  environment: ${{ inputs.ACA_ENVIRONMENT }}
