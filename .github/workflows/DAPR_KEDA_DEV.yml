@@ -72,10 +72,18 @@ jobs:
           --resource-group ${{ vars.RESOURCE_GROUP }} \
           --secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
 
+          REVISION_NAME=$(az containerapp revision list \
+                           --name $BACKEND_SERVICE_NAME  \
+                           --resource-group $RESOURCE_GROUP \
+                           --query [0].name)
+          
+          echo "Revision Name: $REVISION_NAME"
+
           # Update the container app with KEDA scale rule
           az containerapp update \
             --name $BACKEND_SERVICE_NAME \
             --resource-group ${{ vars.RESOURCE_GROUP }}  \
+            --revision $REVISION_NAME \
             --min-replicas $MIN_REPLICAS \
             --max-replicas $MAX_REPLICAS \
             --scale-rule-name "topic-msgs-length" \
@@ -86,3 +94,10 @@ jobs:
                                 "namespace=$SERVICE_BUS_NAMESPACE_NAME" \
                                 "messageCount=$MESSAGE_COUNT" \
                                 "connectionFromEnv=svcbus-connstring"
+          
+          #Restart the container app
+
+          az containerapp revision restart \
+            --resource-group ${{ vars.RESOURCE_GROUP }}  \
+            --name $BACKEND_SERVICE_NAME  \
+            --revision $REVISION_NAME
