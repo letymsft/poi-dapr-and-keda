@@ -228,6 +228,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
   }
   dependsOn: [
     module_environment
+    module_containerregistry
   ]
 }
 
@@ -276,6 +277,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
   }
   dependsOn: [
     module_environment
+    module_containerregistry
   ]
 }
 
@@ -324,6 +326,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
   }
   dependsOn: [
     module_environment
+    module_containerregistry
   ]
 }
 /////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
