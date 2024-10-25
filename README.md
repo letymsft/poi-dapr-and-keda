@@ -1,85 +1,87 @@
-"# DemoGHAdopcion-CSUMexico" 
-TEST+
+# DAPR&KEDAIlluminationPath
 
-[![DEV IAC VALIDATION](https://github.com/devsecopsadoptionmx/devsecopsdemo/actions/workflows/BICEP_DEV_PullRequest.yml/badge.svg)](https://github.com/devsecopsadoptionmx/devsecopsdemo/actions/workflows/BICEP_DEV_PullRequest.yml)
+## Here are the rules
+1. You don’t talk about Fight Club
+2. Solve problems at your pace
+3. You’ll get a coin 🪙 for every problem solved
+4. Special problems gives you 3 coins 🪙🪙🪙      
+5. Guaranteed swag on your first coin
+6. Swag on the total coin mark
+7. Special swag to every finisher
+8. Special swag to the first place (time + coins)
 
-## Overview
+## Prerequisites
+* An Azure subscription
 
-This repository contains a demonstration of a DevSecOps adoption project for CSU Mexico. The solution is designed to showcase best practices in infrastructure as code (IaC), continuous integration/continuous deployment (CI/CD), and security integration.
+### Task 1 🪙
+Fork this repo.
+Follow the below steps in your forked repo.
 
-## Components
+### Task 2 🪙
+Create a service principal which role be contributor in your Azure subscription.
 
-### 1. Infrastructure as Code (IaC)
+### Task 3 🪙
+Create the "AZURE_CREDENTIALS" secret in GitHub using the service principal info from the previous step:
+{
+  "clientId": "XXXXX",
+  "clientSecret": "XXXXX",
+  "subscriptionId": "XXXXX",
+  "tenantId": "XXXXX"
+}
 
-The infrastructure is defined using Bicep, a domain-specific language (DSL) for deploying Azure resources declaratively. The IaC scripts are located in the `iac/` directory and include:
+### Task 4 🪙
+Create the "LOCATION" variable in GitHub:
+LOCATION=centralus
 
-- **Main Bicep File**: Defines the core infrastructure components.
-- **Modules**: Reusable Bicep modules for specific resources.
-- **Parameter Files**: Configuration files for different environments (e.g., dev, staging, production).
+### Task 5 🪙
+Create the "RESOURCE_GROUP" variable in GitHub:
+RESOURCE_GROUP=CUS-CSU-DEV-GHADOP-RGP
 
-### 2. CI/CD Pipelines
+### Task 6 🪙
+In GitHub, go to Actions -> All Workflows and run the workflow "IAC DEV DEPLOYMENT".
 
-The CI/CD pipelines are configured using GitHub Actions. The workflows are located in the `.github/workflows/` directory and include:
+### Task 7 🪙
+Once the previous execution has finished successfully, run the workflow "DAPR_KEDA_DEV".
 
-- **BICEP_DEV_PullRequest.yml**: Validates the Bicep templates on pull requests to the development branch.
-- **BICEP_DEV_Deploy.yml**: Deploys the infrastructure to the development environment.
-- **BICEP_PROD_Deploy.yml**: Deploys the infrastructure to the production environment.
+### Task 8 🪙
+Once the previous execution has finished successfully, run the workflows:
+* ACA DEV API Arquitectura
+* ACA DEV API Iniciativa
+* ACA DEV API Presupuesto
+Once all the previous executions have finished, wait for 2-3 minutes to continue with the next step.
 
-### 3. Application Code
+## DAPR
 
-The application code is organized into three main directories:
+### Task 9 🪙
+In Azure Portal, go to resource group "CUS-CSU-DEV-GHADOP-RGP", and find the container registry created onto it. Copy the Login Server value.
 
-- **src/Store**: Blazor Server front-end web app to display product information, implemented in .NET ![Readme](https://github.com/devsecopsadoptionmx/devsecopsdemo/blob/dev/src/Store/Readme.md)
-- **src/Python.Store.ProductApi**: Contains the source code for the Product API, implemented in Python. ![Readme](https://github.com/devsecopsadoptionmx/devsecopsdemo/blob/dev/src/Python.Store.ProductApi/README.md)
-- **src/Java.Store.InventoryApi**: Contains the source code for the Inventory API, implemented in Java.![Readme](https://github.com/devsecopsadoptionmx/devsecopsdemo/blob/dev/src/Java.Store.InventoryApi/Readme.md)
+### Task 10 🪙
+Execute the below call using the Login Server value.
+curl --location 'https://{Use your Login Server here}/api/iniciativa/createiniciativa' \
+--header 'Content-Type: application/json' \
+--data '{
+    "NombreIniciativa":"Iniciativa 1",
+    "UserId":"user",
+    "Arquitectura":{
+        "NombreArquitectura":"Arquitectura1"
+    },
+    "Presupuesto":{
+        "NombrePresupuesto":"Presupuesto1"
+    }
+}'
 
-### 4. Security Integration
+### Task 11 🪙
+In Azure Portal, monitor the Log stream from apiiniciativa, apiarquitectura and apipresupuetos containers
 
-Security is integrated into the CI/CD pipelines to ensure that the code and infrastructure are secure. This includes:
+### Task 12 🪙
+In Azure Portal, monitor the content of subscription "ftp-subscription" from topic "ftppubsub" in the Service Bus.
 
-- **Static Code Analysis**: Tools like SonarQube are used to analyze the code for vulnerabilities.
-- **Dependency Scanning**: Tools like Dependabot are used to scan for vulnerable dependencies.
-- **Infrastructure Security**: Azure Policy and Security Center are used to enforce security best practices on the deployed resources.
+## KEDA
 
-## Getting Started
+### Task n 🪙
 
-### Prerequisites
+## Challenges
+### DAPR 🪙🪙🪙
+You can use Copilot to create an API with Azure Container App and enable DAPR on it. Use the subscription "ftp-subscription" from topic "ftppubsub".
 
-- Azure Subscription
-- GitHub Account
-- Bicep CLI
-- Python and Java Development Environments
-
-### Setup
-
-1. **Clone the repository**:
-	```sh
-	git clone https://github.com/devsecopsadoptionmx/devsecopsdemo.git
-	cd devsecopsdemo
-	```
-
-2. **Configure Azure CLI**:
-	```sh
-	az login
-	```
-
-3. **Deploy the infrastructure**:
-	```sh
-	az deployment group create --resource-group <resource-group-name> --template-file iac/main.bicep
-	```
-
-4. **Run the application**:
-	- Navigate to the `src/Python.Store.ProductApi` and `src/Java.Store.InventoryApi` directories and follow the respective README files for running the applications.
-
-## Contributing
-
-Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- Special thanks to the CSU Mexico team for their support and collaboration.
-- Thanks to the open-source community for providing the tools and resources that made this project possible.
+### KEDA 🪙🪙🪙
