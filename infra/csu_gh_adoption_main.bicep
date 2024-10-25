@@ -151,6 +151,10 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
         principalId: containerApiPresupuesto.outputs.systemAssignedMIPrincipalId
         roleDefinitionIdOrName: 'Azure Service Bus Data Owner'
       }
+      {
+        principalId: module_userIdentity.outputs.principalId
+        roleDefinitionIdOrName: 'Azure Service Bus Data Owner'
+      }
     ]
     topics: [
       {
