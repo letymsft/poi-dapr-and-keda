@@ -27,8 +27,6 @@ param apiarquitectura object
 
 param apipresupuesto object
 
-param loadtesting object
-
 var uniqueToken = toLower(take(uniqueString(subscription().id, environment.name, location), 5))
 
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
