@@ -13,9 +13,9 @@ jobs:
     #needs: Deploy_Baseline
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Azure CLI Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Enable KEDA Scale Rule
@@ -47,9 +47,9 @@ jobs:
         container_name: ${{ fromJson(inputs.KEDA_CONTAINER_NAMES) }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Azure CLI Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Enable KEDA Scale Rule (Secrets)
