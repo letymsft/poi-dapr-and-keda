@@ -19,6 +19,7 @@ jobs:
         id: service_bus
         run: |
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)  
+          echo "SERVICE_BUS_NAMESPACE_NAME = $SERVICE_BUS_NAMESPACE_NAME"
           echo "SERVICE_BUS_NAMESPACE_NAME=$SERVICE_BUS_NAMESPACE_NAME" >> $GITHUB_OUTPUT  
 
   Build-Publish-ACA:
