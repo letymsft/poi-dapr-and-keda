@@ -139,7 +139,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
     disableLocalAuth: false
     tags: tags
     skuObject: {
-      name: 'Standard'
+      name: 'Premium'
     }
     roleAssignments: [
       {
