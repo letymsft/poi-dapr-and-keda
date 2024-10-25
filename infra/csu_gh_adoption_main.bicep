@@ -324,7 +324,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
 
 /////////////////////////////////////////Start infrastructure for load testing///////////////////////////////////////////
 module loadTestingComponent 'br/public:avm/res/load-test-service/load-test:0.3.0' = {
-  name: 'pid-api-${replaceAll(loadtesting.name, tokenReplacements, false)}-${uniqueToken}'
+  name: 'pid-api-${replaceAll(apiiniciativa.loadTesting.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
     name: apiiniciativa.loadTesting.name
