@@ -9,7 +9,6 @@ on:
 jobs:
   Build-Publish-ACA:
     uses: ./.github/workflows/Template_ACA.yml
-    needs: [Get-Component-Information]
     with:
       CONTAINER_NAME: apipresupuesto
       DOCKER_PATH: ./src/KEDA.DAPR.Demo/src/Demo1.Presupuesto/Dockerfile
