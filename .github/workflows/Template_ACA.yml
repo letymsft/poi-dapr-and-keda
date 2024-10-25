@@ -15,6 +15,24 @@ on:
       ACA_ENVIRONMENT:
         required: true
         type: string
+      MIN_REPLICAS:
+        required: false
+        type: string
+      MAX_REPLICAS:
+        required: false
+        type: string
+      SCALE_RULE_NAME:
+        required: false
+        type: string
+      SCALE_RULE_TYPE:
+        required: false
+        type: string
+      SCALE_RULE_AUTH:
+        required: false
+        type: string
+      SCALE_RULE_METADATA:
+        required: false
+        type: string
        
 jobs:
   buildImage:
@@ -44,8 +62,22 @@ jobs:
           AZURE_CONTAINER_REGISTRY=$(az acr list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           REVISION_SUFIX="${{ github.run_number }}"
           echo "Revision Sufix: ${REVISION_SUFIX}"
-          echo "github.sha: ${{ github.sha }}"
-          az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:${{ github.sha }} --revision-suffix ${REVISION_SUFIX}
+          echo "github.sha: ${{ github.sha }}"          
+
+          # Base command  
+          COMMAND="az containerapp update -n ${{ inputs.CONTAINER_NAME }} -g ${{ vars.RESOURCE_GROUP }} -i ${AZURE_CONTAINER_REGISTRY}.azurecr.io/${{ inputs.CONTAINER_NAME }}:${{ github.sha }} --revision-suffix ${REVISION_SUFIX}" 
+          
+          # Optional parameters  
+          [ -n "${{ inputs.MIN_REPLICAS }}" ] && COMMAND="$COMMAND --min-replicas ${{ inputs.MIN_REPLICAS }}"  
+          [ -n "${{ inputs.MAX_REPLICAS }}" ] && COMMAND="$COMMAND --max-replicas ${{ inputs.MAX_REPLICAS }}"
+          [ -n "${{ inputs.SCALE_RULE_NAME }}" ] && COMMAND="$COMMAND --scale-rule-name ${{ inputs.SCALE_RULE_NAME }}"
+          [ -n "${{ inputs.SCALE_RULE_TYPE }}" ] && COMMAND="$COMMAND --scale-rule-type ${{ inputs.SCALE_RULE_TYPE }}"
+          [ -n "${{ inputs.SCALE_RULE_AUTH }}" ] && COMMAND="$COMMAND --scale-rule-auth ${{ inputs.SCALE_RULE_AUTH }}"
+          [ -n "${{ inputs.SCALE_RULE_METADATA }}" ] && COMMAND="$COMMAND --scale-rule-metadata ${{ inputs.SCALE_RULE_METADATA }}"
+            
+          # Execute the command  
+          echo "Executing command: $COMMAND"  
+          eval $COMMAND
 
           REVISION_NAME=$(az containerapp revision list \
                          --name ${{ inputs.CONTAINER_NAME }}  \

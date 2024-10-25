@@ -45,14 +45,9 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Enable KEDA Scale Rule
+      - name: Enable KEDA Scale Rule (Secrets)
         run: |          
           BACKEND_SERVICE_NAME="apipresupuesto"
-          TOPIC_NAME="presupuestopubsub"
-          SUBSCRIPTION_NAME="apipresupuesto"
-          MAX_REPLICAS=5
-          MIN_REPLICAS=1
-          MESSAGE_COUNT=10
 
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           echo "Service Bus Namespace Name: $SERVICE_BUS_NAMESPACE_NAME" 
@@ -70,37 +65,4 @@ jobs:
             --resource-group ${{ vars.RESOURCE_GROUP }} \
             --secrets "svcbus-connstring=$SERVICE_BUS_CONNECTION_STRING"
 
-          REVISION_NAME=$(az containerapp revision list \
-                           --name $BACKEND_SERVICE_NAME  \
-                           --resource-group ${{ vars.RESOURCE_GROUP }} \
-                           --query [0].name | tr -d '";')
 
-          echo "Revision Name: $REVISION_NAME"
-
-          # Get revision suffix 
-          REVISION_SUFIX="$(echo "$REVISION_NAME" | awk -F'--' '{print $2}')"
-          REVISION_SUFIX="${{ github.run_number }}"
-
-          echo "Revision Sufix: $REVISION_SUFIX"          
-
-          # Update the container app with KEDA scale rule
-          az containerapp update \
-            --name $BACKEND_SERVICE_NAME \
-            --revision-suffix $REVISION_SUFIX \
-            --resource-group ${{ vars.RESOURCE_GROUP }}  \
-            --min-replicas $MIN_REPLICAS \
-            --max-replicas $MAX_REPLICAS \
-            --scale-rule-name "topic-msgs-length" \
-            --scale-rule-type "azure-servicebus" \
-            --scale-rule-auth "connection=svcbus-connstring" \
-            --scale-rule-metadata "topicName=$TOPIC_NAME" \
-                                "subscriptionName=$SUBSCRIPTION_NAME" \
-                                "namespace=$SERVICE_BUS_NAMESPACE_NAME" \
-                                "messageCount=$MESSAGE_COUNT" \
-                                "connectionFromEnv=svcbus-connstring"
-          
-          #Restart the container app
-          az containerapp revision restart \
-            --resource-group ${{ vars.RESOURCE_GROUP }}  \
-            --name $BACKEND_SERVICE_NAME  \
-            --revision $REVISION_NAME
