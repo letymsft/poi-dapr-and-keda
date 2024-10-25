@@ -12,8 +12,8 @@ on:
       DOCKER_BUILD_CONTEXT:
         required: true
         type: string
-      LOAD_TESTING_NAME:
-        required: false
+      LOAD_TESTING_FLAG:
+        required: true
         type: string
       ACA_ENVIRONMENT:
         required: true
@@ -67,7 +67,7 @@ jobs:
     #environment: ${{ inputs.ACA_ENVIRONMENT }}
     needs: [deploy]
     steps:
-      - if: ${{ inputs.LOAD_TESTING_NAME != '' }}
+      - if: ${{ inputs.LOAD_TESTING_FLAG }}
         run: echo "RUN LOAD TESTING"
       - uses: actions/checkout@v4
       - name: Azure login
@@ -78,7 +78,7 @@ jobs:
         uses: azure/load-testing@v1
         with:
           loadTestConfigFile: 'src/KEDA.DAPR.Demo/src/tests/${{ inputs.CONTAINER_NAME }}/config.yaml'
-          loadTestResource: ${{ inputs.LOAD_TESTING_NAME }}
+          loadTestResource: ${{ vars.LOAD_TESTING_NAME }}
           resourceGroup: ${{ vars.RESOURCE_GROUP }}
           env: |
             [

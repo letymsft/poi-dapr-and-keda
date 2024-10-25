@@ -1,4 +1,4 @@
-displayName: Test_10/25/2024_01:20:15 AM
+displayName: apiiniciativa_loadtesting
 testPlan: apiiniciativa.jmx
 description: Load testing demo JMeter
 engineInstances: 1

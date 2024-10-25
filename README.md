@@ -35,6 +35,7 @@ Create the "AZURE_CREDENTIALS" secret in GitHub using the service principal info
 Create next variables in GitHub;
 LOCATION=centralus
 RESOURCE_GROUP=CUS-CSU-DEV-GHADOP-RGP
+LOAD_TESTING_NAME=CUSCSUDEV-GHADOP-LT
 
 ### Task 5 🪙
 In GitHub, go to Actions -> All Workflows and run the workflow "IAC DEV DEPLOYMENT".

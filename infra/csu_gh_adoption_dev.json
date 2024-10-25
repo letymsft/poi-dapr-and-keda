@@ -84,10 +84,7 @@
         "scaleMinReplicas": 1,
         "daprEnabled": true,
         "daprAppId": "apiiniciativa",
-        "daprAppPort": 8080,
-        "loadTesting": {
-          "name": "apiiniciativa_loadtesting"
-        }
+        "daprAppPort": 8080
       }
     },
     "apiarquitectura": {
@@ -116,6 +113,11 @@
         "daprEnabled": true,
         "daprAppId": "apipresupuesto",
         "daprAppPort": 8080
+      }
+    },
+    "loadTesting": {
+      "value": {
+        "name": "__LOC__CSU__ENV__-GHADOP-LT"
       }
     }
   }
