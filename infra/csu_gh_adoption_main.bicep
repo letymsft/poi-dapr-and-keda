@@ -27,6 +27,8 @@ param apiarquitectura object
 
 param apipresupuesto object
 
+param loadTesting object
+
 var uniqueToken = toLower(take(uniqueString(subscription().id, environment.name, location), 5))
 
 //////////////////////////////////////////////////////////// TOKEN REPLACEMENTS ////////////////////////////////////////////////////////////
@@ -326,3 +328,14 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
   ]
 }
 /////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
+
+/////////////////////////////////////////Start infrastructure for load testing///////////////////////////////////////////
+module loadTestingComponent 'br/public:avm/res/load-test-service/load-test:0.3.0' = {
+  name: 'pid-api-${replaceAll(loadTesting.name, tokenReplacements, false)}-${uniqueToken}'
+  scope: resourceGroup(resourceGrName)
+  params: {
+    name: replaceAll(loadTesting.name, tokenReplacements, false)
+    location: location
+  }
+}
+//////////////////////////////////////////End infrastructure for load testing///////////////////////////////////////////

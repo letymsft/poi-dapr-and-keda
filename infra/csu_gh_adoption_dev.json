@@ -114,6 +114,11 @@
         "daprAppId": "apipresupuesto",
         "daprAppPort": 8080
       }
+    },
+    "loadTesting": {
+      "value": {
+        "name": "__LOC__CSU__ENV__-GHADOP-LT"
+      }
     }
   }
 }

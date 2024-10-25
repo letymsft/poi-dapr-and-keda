@@ -1,0 +1,12 @@
+name: LOAD TESTING DEV
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apiiniciativa_loadtesting:
+    uses: ./.github/workflows/Template_LT.yml
+    with:
+      CONTAINER_NAME: apiiniciativa
+      ACA_ENVIRONMENT : dev
+    secrets: inherit
