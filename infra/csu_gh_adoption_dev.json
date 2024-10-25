@@ -84,7 +84,10 @@
         "scaleMinReplicas": 1,
         "daprEnabled": true,
         "daprAppId": "apiiniciativa",
-        "daprAppPort": 8080
+        "daprAppPort": 8080,
+        "loadTesting": {
+          "name": "apiiniciativa_loadtesting"
+        }
       }
     },
     "apiarquitectura": {
@@ -113,11 +116,6 @@
         "daprEnabled": true,
         "daprAppId": "apipresupuesto",
         "daprAppPort": 8080
-      }
-    },
-    "loadtesting": {
-      "value": {
-        "name": "loadtesting"
       }
     }
   }

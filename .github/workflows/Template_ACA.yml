@@ -64,6 +64,8 @@ jobs:
     #environment: ${{ inputs.ACA_ENVIRONMENT }}
     needs: [deploy]
     steps:
+      - if: ${{ inputs.LOAD_TESTING_NAME != '' }}
+        run: echo "RUN LOAD TESTING"
       - uses: actions/checkout@v4
       - name: Azure login
         uses: azure/login@v2
@@ -73,7 +75,7 @@ jobs:
         uses: azure/load-testing@v1
         with:
           loadTestConfigFile: 'src/KEDA.DAPR.Demo/src/tests/${{ inputs.CONTAINER_NAME }}/config.yaml'
-          loadTestResource: ${{ vars.LOAD_TESTING_COMP }}
+          loadTestResource: ${{ inputs.LOAD_TESTING_NAME }}
           resourceGroup: ${{ vars.RESOURCE_GROUP }}
           env: |
             [

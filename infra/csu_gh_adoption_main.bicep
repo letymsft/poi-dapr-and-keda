@@ -329,7 +329,7 @@ module loadTestingComponent 'br/public:avm/res/load-test-service/load-test:0.3.0
   name: 'pid-api-${replaceAll(loadtesting.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    name: loadtesting.name
+    name: apiiniciativa.loadTesting.name
     location: location
   }
 }
