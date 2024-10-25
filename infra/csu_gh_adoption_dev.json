@@ -114,6 +114,11 @@
         "daprAppId": "apipresupuesto",
         "daprAppPort": 8080
       }
+    },
+    "loadtesting": {
+      "value": {
+        "name": "loadtesting"
+      }
     }
   }
 }
