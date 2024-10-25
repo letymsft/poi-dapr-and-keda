@@ -12,9 +12,6 @@ on:
       DOCKER_BUILD_CONTEXT:
         required: true
         type: string
-      LOAD_TESTING_FLAG:
-        required: true
-        type: string
       ACA_ENVIRONMENT:
         required: true
         type: string

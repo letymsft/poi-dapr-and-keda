@@ -13,6 +13,5 @@ jobs:
       CONTAINER_NAME: apiarquitectura
       DOCKER_PATH: ./src/KEDA.DAPR.Demo/src/Demo1.Arquitectura/Dockerfile
       DOCKER_BUILD_CONTEXT: ./src/KEDA.DAPR.Demo/src
-      LOAD_TESTING_FLAG: 'false'
       ACA_ENVIRONMENT : dev
     secrets: inherit
