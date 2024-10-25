@@ -1,5 +1,7 @@
 # DAPR&KEDAIlluminationPath
 
+![Model](https://github.com/letymsft/poi-dapr-and-keda/blob/main/images/ArchitectureDiagram.png)
+
 ## Here are the rules
 1. You don’t talk about Fight Club
 2. Solve problems at your pace
