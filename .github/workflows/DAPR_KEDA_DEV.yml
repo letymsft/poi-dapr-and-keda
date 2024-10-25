@@ -47,9 +47,9 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Enable KEDA Scale Rule
         run: |          
-          BACKEND_SERVICE_NAME="apiiniciativa"
+          BACKEND_SERVICE_NAME="apipresupuesto"
           TOPIC_NAME="presupuestopubsub"
-          SUBSCRIPTION_NAME="apiiniciativa"
+          SUBSCRIPTION_NAME="apipresupuesto"
           MAX_REPLICAS=5
           MIN_REPLICAS=1
           MESSAGE_COUNT=10

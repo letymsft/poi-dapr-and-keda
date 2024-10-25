@@ -162,11 +162,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
       {
         name: 'presupuestopubsub'
         roleAssignments: []
-        subscriptions: [
-          {
-            name: 'apiiniciativa'
-          }
-        ]
+        subscriptions: []
         authorizationRules: []
       }
       {
@@ -191,14 +187,13 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
   name: 'pid-api-${replaceAll(apiiniciativa.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    // Required parameters
     containers: [
       {
-        image: apiiniciativa.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
-        name: apiiniciativa.name //'apiiniciativa'
+        image: apiiniciativa.image
+        name: apiiniciativa.name
         resources: {
-          cpu: apiiniciativa.cpu //'1'
-          memory: apiiniciativa.memory //0.5Gi'
+          cpu: apiiniciativa.cpu
+          memory: apiiniciativa.memory
         }
       }
     ]
@@ -206,9 +201,9 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     name: apiiniciativa.name
     location: location
     ingressExternal: apiiniciativa.ingressExternal
-    ingressTargetPort: apiiniciativa.targetPort //80
-    disableIngress: apiiniciativa.disableIngress //false
-    ingressTransport: apiiniciativa.ingressTransport //'http'
+    ingressTargetPort: apiiniciativa.targetPort
+    disableIngress: apiiniciativa.disableIngress
+    ingressTransport: apiiniciativa.ingressTransport
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apiiniciativa.scaleMaxReplicas
     scaleMinReplicas: apiiniciativa.scaleMinReplicas
@@ -232,6 +227,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
   }
   dependsOn: [
     module_environment
+    module_containerregistry
   ]
 }
 
@@ -239,24 +235,20 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
   name: 'pid-api-${replaceAll(apiarquitectura.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    // Required parameters
     containers: [
       {
-        image: apiarquitectura.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
-        name: apiarquitectura.name //'apiarquitectura'
+        image: apiarquitectura.image
+        name: apiarquitectura.name
         resources: {
-          cpu: apiarquitectura.cpu //'1'
-          memory: apiarquitectura.memory //0.5Gi'
+          cpu: apiarquitectura.cpu
+          memory: apiarquitectura.memory
         }
       }
     ]
     environmentResourceId: module_environment.outputs.resourceId
     name: apiarquitectura.name
     location: location
-    ingressExternal: apiarquitectura.ingressExternal
-    ingressTargetPort: apiarquitectura.targetPort //80
-    disableIngress: apiarquitectura.disableIngress //false
-    ingressTransport: apiarquitectura.ingressTransport //'http'
+    disableIngress: apiarquitectura.disableIngress
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apiarquitectura.scaleMaxReplicas
     scaleMinReplicas: apiarquitectura.scaleMinReplicas
@@ -280,6 +272,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
   }
   dependsOn: [
     module_environment
+    module_containerregistry
   ]
 }
 
@@ -287,24 +280,20 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
   name: 'pid-api-${replaceAll(apipresupuesto.name, tokenReplacements, false)}-${uniqueToken}'
   scope: resourceGroup(resourceGrName)
   params: {
-    // Required parameters
     containers: [
       {
-        image: apipresupuesto.image //'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
-        name: apipresupuesto.name //'apipresupuesto'
+        image: apipresupuesto.image
+        name: apipresupuesto.name
         resources: {
-          cpu: apipresupuesto.cpu //'1'
-          memory: apipresupuesto.memory //0.5Gi'
+          cpu: apipresupuesto.cpu
+          memory: apipresupuesto.memory
         }
       }
     ]
     environmentResourceId: module_environment.outputs.resourceId
     name: apipresupuesto.name
     location: location
-    ingressExternal: apipresupuesto.ingressExternal
-    ingressTargetPort: apipresupuesto.targetPort //80
-    disableIngress: apipresupuesto.disableIngress //false
-    ingressTransport: apipresupuesto.ingressTransport //'http'
+    disableIngress: apipresupuesto.disableIngress
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apipresupuesto.scaleMaxReplicas
     scaleMinReplicas: apipresupuesto.scaleMinReplicas
@@ -328,6 +317,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
   }
   dependsOn: [
     module_environment
+    module_containerregistry
   ]
 }
 /////////////////////////////////////////End infrastructure for DAPR & KEDA Demo/////////////////////////////////////////
