@@ -67,7 +67,7 @@ jobs:
     #environment: ${{ inputs.ACA_ENVIRONMENT }}
     needs: [deploy]
     steps:
-      - if: ${{ inputs.LOAD_TESTING_FLAG }}
+      - if: ${{ inputs.LOAD_TESTING_FLAG == 'true' }}
         run: echo "RUN LOAD TESTING"
       - uses: actions/checkout@v4
       - name: Azure login
