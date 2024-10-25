@@ -1,4 +1,4 @@
-name: ACA DEV API Iniciativa
+name: API Iniciativa (DEV)
 
 on:
   workflow_dispatch:

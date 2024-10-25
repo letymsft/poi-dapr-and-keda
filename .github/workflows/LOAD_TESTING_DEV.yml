@@ -1,4 +1,4 @@
-name: LOAD TESTING DEV
+name: LOAD TESTING (DEV)
 
 on:
   workflow_dispatch:

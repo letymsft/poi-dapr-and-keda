@@ -1,4 +1,4 @@
-name: IAC DEV DEPLOYMENT
+name: IAC DEPLOYMENT (DEV)
 on:
   workflow_dispatch:
   push:

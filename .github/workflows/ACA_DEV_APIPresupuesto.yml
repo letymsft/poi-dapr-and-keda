@@ -1,4 +1,4 @@
-name: ACA DEV API Presupuesto
+name: API Presupuesto (DEV)
 
 on:
   workflow_dispatch:
@@ -13,5 +13,11 @@ jobs:
       CONTAINER_NAME: apipresupuesto
       DOCKER_PATH: ./src/KEDA.DAPR.Demo/src/Demo1.Presupuesto/Dockerfile
       DOCKER_BUILD_CONTEXT: ./src/KEDA.DAPR.Demo/src
-      ACA_ENVIRONMENT : dev
+      ACA_ENVIRONMENT: dev
+      MIN_REPLICAS: "1"
+      MAX_REPLICAS: "5"
+      SCALE_RULE_NAME: "topic-msgs-length"
+      SCALE_RULE_TYPE: "azure-servicebus"
+      SCALE_RULE_AUTH: "connection=svcbus-connstring"
+      SCALE_RULE_METADATA: "topicName=presupuestopubsub subscriptionName=apipresupuesto messageCount=10 connectionFromEnv=svcbus-connstring"
     secrets: inherit

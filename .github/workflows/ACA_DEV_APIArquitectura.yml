@@ -1,4 +1,4 @@
-name: ACA DEV API Arquitectura
+name: API Arquitectura (DEV)
 
 on:
   workflow_dispatch:
