@@ -14,4 +14,10 @@ jobs:
       DOCKER_PATH: ./src/KEDA.DAPR.Demo/src/Demo1.Arquitectura/Dockerfile
       DOCKER_BUILD_CONTEXT: ./src/KEDA.DAPR.Demo/src
       ACA_ENVIRONMENT : dev
+      MIN_REPLICAS: "1"
+      MAX_REPLICAS: "5"
+      SCALE_RULE_NAME: "topic-msgs-length"
+      SCALE_RULE_TYPE: "azure-servicebus"
+      SCALE_RULE_AUTH: "connection=svcbus-connstring"
+      SCALE_RULE_METADATA: "topicName=arquitecturapubsub subscriptionName=apiarquitectura messageCount=10 connectionFromEnv=svcbus-connstring"
     secrets: inherit
