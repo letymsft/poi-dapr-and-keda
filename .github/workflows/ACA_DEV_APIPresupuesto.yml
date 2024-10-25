@@ -15,13 +15,14 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}          
       - name: Get Service Bus Namespace Name
-        id: enable_keda
+        id: service_bus
         run: |
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
           echo "SERVICE_BUS_NAMESPACE_NAME=$SERVICE_BUS_NAMESPACE_NAME" >> $GITHUB_ENV
 
   Build-Publish-ACA:
     uses: ./.github/workflows/Template_ACA.yml
+    needs: [Get-Component-Information]
     with:
       CONTAINER_NAME: apipresupuesto
       DOCKER_PATH: ./src/KEDA.DAPR.Demo/src/Demo1.Presupuesto/Dockerfile
@@ -32,5 +33,5 @@ jobs:
       SCALE_RULE_NAME: "topic-msgs-length"
       SCALE_RULE_TYPE: "azure-servicebus"
       SCALE_RULE_AUTH: "connection=svcbus-connstring"
-      SCALE_RULE_METADATA: "\"topicName=presupuestopubsub\" \"subscriptionName=apipresupuesto\" \"namespace= ${{ env.SERVICE_BUS_NAMESPACE_NAME }}\" \"messageCount=10\" \"connectionFromEnv=svcbus-connstring\""
+      SCALE_RULE_METADATA: "\"topicName=presupuestopubsub\" \"subscriptionName=apipresupuesto\" \"namespace=${{ steps.service_bus.outputs.SERVICE_BUS_NAMESPACE_NAME }}\" \"messageCount=10\" \"connectionFromEnv=svcbus-connstring\""
     secrets: inherit
