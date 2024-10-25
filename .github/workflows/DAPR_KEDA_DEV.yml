@@ -1,4 +1,4 @@
-name: DAPR_KEDA_DEV
+name: DAPR & KEDA Enabler (DEV)
 on:
   workflow_dispatch:
 jobs:

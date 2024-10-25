@@ -1,4 +1,4 @@
-name: Template LT
+name: Template Load Testing
 
 on:
   workflow_call:
