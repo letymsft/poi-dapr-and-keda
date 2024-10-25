@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Dapr.Client;
+using System.Threading;
 
 namespace Demo1.Presupuesto.Controllers
 {
@@ -28,6 +29,7 @@ namespace Demo1.Presupuesto.Controllers
         public async Task<IActionResult> CreatePresupuesto([FromBody] string presupuestoRequest)
         {
             _logger.LogInformation("Inicia creación de presupuesto");
+            await Task.Delay(1000);
             if (presupuestoRequest is not null)
             {
                 _logger.LogInformation("Presupuesto a publicar: {}", presupuestoRequest);
@@ -37,7 +39,6 @@ namespace Demo1.Presupuesto.Controllers
 
                 await client.PublishEventAsync("pubsub-sandbox-servicebus", "ftppubsub", presupuestoRequest);
                 _logger.LogInformation("Presupuesto publicado {}", presupuesto.IniciativaId);
-                
                 return Ok();
             }
             return BadRequest();
