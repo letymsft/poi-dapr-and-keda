@@ -27,6 +27,7 @@ jobs:
           echo "APPLICATION_URL=$APPLICATION_URL" >> $GITHUB_OUTPUT
           LOAD_TESTING_NAME=$(az resource list --resource-group ${{ vars.RESOURCE_GROUP }} --resource-type Microsoft.LoadTestService/loadTests --query "[].{Name:name}" --output tsv)
           echo "LOAD_TESTING_NAME=$LOAD_TESTING_NAME" >> $GITHUB_OUTPUT
+          echo "Testing Application URL: $APPLICATION_URL"
       - name: 'Azure Load Testing'
         uses: azure/load-testing@v1
         with:
