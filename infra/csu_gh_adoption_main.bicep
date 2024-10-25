@@ -134,6 +134,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
   params: {
     name: '${replaceAll(serviceBus.name, tokenReplacements, false)}-${uniqueToken}'
     location: location
+    disableLocalAuth: false
     tags: tags
     skuObject: {
       name: 'Premium'
