@@ -1,4 +1,4 @@
-name: Template ACA
+name: Template DAPR KEDA
 
 on:
   workflow_call:
