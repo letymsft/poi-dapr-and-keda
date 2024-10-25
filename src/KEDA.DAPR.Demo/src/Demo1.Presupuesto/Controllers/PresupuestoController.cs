@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Dapr.Client;
-using System.Threading;
+using System;
 
 namespace Demo1.Presupuesto.Controllers
 {
@@ -29,7 +29,7 @@ namespace Demo1.Presupuesto.Controllers
         public async Task<IActionResult> CreatePresupuesto([FromBody] string presupuestoRequest)
         {
             _logger.LogInformation("Inicia creación de presupuesto");
-            await Task.Delay(1000);
+            await Task.Delay(TimeSpan.FromSeconds(2));
             if (presupuestoRequest is not null)
             {
                 _logger.LogInformation("Presupuesto a publicar: {}", presupuestoRequest);
