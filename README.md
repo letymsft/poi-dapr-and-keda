@@ -84,3 +84,6 @@ In Azure Portal, monitor the content of subscription "ftp-subscription" from top
 You can use Copilot to create an API with Azure Container App and enable DAPR on it. Use the subscription "ftp-subscription" from topic "ftppubsub".
 
 ### KEDA 🪙🪙🪙
+Enable KEDA auto-scaling for the container app 'apiarquitectura' based on Service Bus messages from the 'arquitecturapubsub' topic and the 'apiarquitectura' subscription. 
+> [!TIP]
+> It is necessary to create a secret for the Service Bus in the 'apiarquitectura' container application.
