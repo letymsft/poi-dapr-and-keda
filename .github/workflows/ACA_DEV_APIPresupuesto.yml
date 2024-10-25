@@ -13,12 +13,14 @@ jobs:
       - name: Azure CLI Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}          
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Get Service Bus Namespace Name
         id: service_bus
         run: |
-          SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)
-          echo "SERVICE_BUS_NAMESPACE_NAME=$SERVICE_BUS_NAMESPACE_NAME" >> $GITHUB_ENV
+          SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)  
+          echo "SERVICE_BUS_NAMESPACE_NAME=$SERVICE_BUS_NAMESPACE_NAME" >> $GITHUB_ENV  
+          echo "::set-output name=SERVICE_BUS_NAMESPACE_NAME::$SERVICE_BUS_NAMESPACE_NAME"
 
   Build-Publish-ACA:
     uses: ./.github/workflows/Template_ACA.yml
@@ -33,5 +35,5 @@ jobs:
       SCALE_RULE_NAME: "topic-msgs-length"
       SCALE_RULE_TYPE: "azure-servicebus"
       SCALE_RULE_AUTH: "connection=svcbus-connstring"
-      SCALE_RULE_METADATA: "\"topicName=presupuestopubsub\" \"subscriptionName=apipresupuesto\" \"namespace=${{ steps.service_bus.outputs.SERVICE_BUS_NAMESPACE_NAME }}\" \"messageCount=10\" \"connectionFromEnv=svcbus-connstring\""
+      SCALE_RULE_METADATA: '"topicName=presupuestopubsub" "subscriptionName=apipresupuesto" "namespace=${{ needs.Get-Component-Information.outputs.SERVICE_BUS_NAMESPACE_NAME }}" "messageCount=10" "connectionFromEnv=svcbus-connstring"'
     secrets: inherit
