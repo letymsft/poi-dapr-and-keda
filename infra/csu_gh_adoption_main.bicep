@@ -162,11 +162,7 @@ module module_servicebus 'br/public:avm/res/service-bus/namespace:0.9.0' = {
       {
         name: 'presupuestopubsub'
         roleAssignments: []
-        subscriptions: [
-          {
-            name: 'apiiniciativa'
-          }
-        ]
+        subscriptions: []
         authorizationRules: []
       }
       {
@@ -252,10 +248,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     environmentResourceId: module_environment.outputs.resourceId
     name: apiarquitectura.name
     location: location
-    ingressExternal: apiarquitectura.ingressExternal
-    ingressTargetPort: apiarquitectura.targetPort
     disableIngress: apiarquitectura.disableIngress
-    ingressTransport: apiarquitectura.ingressTransport
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apiarquitectura.scaleMaxReplicas
     scaleMinReplicas: apiarquitectura.scaleMinReplicas
@@ -300,10 +293,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     environmentResourceId: module_environment.outputs.resourceId
     name: apipresupuesto.name
     location: location
-    ingressExternal: apipresupuesto.ingressExternal
-    ingressTargetPort: apipresupuesto.targetPort
     disableIngress: apipresupuesto.disableIngress
-    ingressTransport: apipresupuesto.ingressTransport
     workloadProfileName: environment.workloadProfileName
     scaleMaxReplicas: apipresupuesto.scaleMaxReplicas
     scaleMinReplicas: apipresupuesto.scaleMinReplicas
