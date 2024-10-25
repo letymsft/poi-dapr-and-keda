@@ -28,6 +28,7 @@ jobs:
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)  
           echo "Service Bus Namespace Name: $SERVICE_BUS_NAMESPACE_NAME"  
           echo "Container App Environment Name: $ENVIRONMENT"  
+          echo "Resource Group: ${{ vars.RESOURCE_GROUP }}"
           # Replace String "#{SERVICE_BUS_NAMESPACE}#" in DAPR_YAML_FILE  
           sed -i "s/#{SERVICE_BUS_NAMESPACE}#/$SERVICE_BUS_NAMESPACE_NAME/g" $DAPR_YAML_FILE  
           cat $DAPR_YAML_FILE  
@@ -57,6 +58,7 @@ jobs:
           BACKEND_SERVICE_NAME="${{ matrix.container_name }}"  
           SERVICE_BUS_NAMESPACE_NAME=$(az servicebus namespace list --resource-group ${{ vars.RESOURCE_GROUP }} --query '[0].name' --output tsv)  
           echo "Service Bus Namespace Name: $SERVICE_BUS_NAMESPACE_NAME"  
+          echo "Resource Group: ${{ vars.RESOURCE_GROUP }}"
           SERVICE_BUS_CONNECTION_STRING=$(az servicebus namespace authorization-rule keys list \  
             --name RootManageSharedAccessKey \  
             --resource-group ${{ vars.RESOURCE_GROUP }} \  
