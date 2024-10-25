@@ -3,7 +3,7 @@ name: Template DAPR KEDA
 on:
   workflow_call:
     inputs:
-      CONTAINER_NAMES:
+      KEDA_CONTAINER_NAMES:
         required: true
         type: string
 
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        container_name: ${{ fromJson(inputs.CONTAINER_NAMES) }}
+        container_name: ${{ fromJson(inputs.KEDA_CONTAINER_NAMES) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
