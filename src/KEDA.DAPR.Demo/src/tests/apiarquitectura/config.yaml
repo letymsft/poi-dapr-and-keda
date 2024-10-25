@@ -1,8 +1,8 @@
-displayName: apiiniciativa load testing
-testPlan: apiiniciativa.jmx
+displayName: apiarquitectura load testing
+testPlan: apiarquitectura.jmx
 description: Load testing demo JMeter
 engineInstances: 1
-testId: apiiniciativa_loadtesting
+testId: apiarquitectura_loadtesting
 testType: JMX
 splitAllCSVs: False
 failureCriteria: []
