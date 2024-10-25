@@ -5,5 +5,5 @@ jobs:
   Enable_DAPR_KEDA:
     uses: ./.github/workflows/Template_DAPR_KEDA.yml
     with:
-      KEDA_CONTAINER_NAMES: '["apiiniciativa"]'
+      KEDA_CONTAINER_NAMES: '["apipresupuesto"]'
     secrets: inherit
