@@ -1,0 +1,11 @@
+displayName: Test_10/25/2024_01:20:15 AM
+testPlan: apiiniciativa.jmx
+description: Load testing demo JMeter
+engineInstances: 1
+testId: 767c5069-3129-459c-aacb-23ec7db4b033
+testType: JMX
+splitAllCSVs: False
+failureCriteria: []
+autoStop:
+  errorPercentage: 90
+  timeWindow: 60
