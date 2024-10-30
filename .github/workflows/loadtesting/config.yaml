@@ -1,5 +1,5 @@
 displayName: '${{inputs.CONTAINER_NAME}} load testing'
-testPlan: '../../../src/KEDA.DAPR.Demo/src/tests/${{inputs.CONTAINER_NAME}}/${{inputs.CONTAINER_NAME}}.jmx'
+testPlan: '../../../src/KEDA.DAPR.Demo/src/tests/apiiniciativa/apiiniciativa.jmx'
 description: Load testing demo JMeter
 engineInstances: 1
 testId: apiiniciativa_loadtesting
