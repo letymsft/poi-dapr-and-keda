@@ -1,9 +1,9 @@
-displayName: ${{ inputs.CONTAINER_NAME }} load testing
+displayName: '${{ inputs.CONTAINER_NAME }} load testing'
 #testPlan: ${{ secrets.SUBNET_LT }}.jmx
-testPlan: src/KEDA.DAPR.Demo/src/tests/${{ inputs.CONTAINER_NAME }}/${{ inputs.CONTAINER_NAME }}.jmx
+testPlan: 'src/KEDA.DAPR.Demo/src/tests/${{ inputs.CONTAINER_NAME }}/${{ inputs.CONTAINER_NAME }}.jmx'
 description: Load testing demo JMeter
 engineInstances: 1
-testId: ${{ inputs.CONTAINER_NAME }}_loadtesting
+testId: '${{ inputs.CONTAINER_NAME }}_loadtesting'
 testType: JMX
 splitAllCSVs: False
 failureCriteria: []
