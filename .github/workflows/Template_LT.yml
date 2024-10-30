@@ -38,6 +38,10 @@ jobs:
           env: |
             [
               {
+                "name": "CONTAINER_NAME",
+                "value": "${{ inputs.CONTAINER_NAME }}"
+              },
+              {
                 "name": "${{ inputs.CONTAINER_NAME }}_domain",
                 "value": "${{ steps.application_env_vars.outputs.APPLICATION_URL }}"
               }
