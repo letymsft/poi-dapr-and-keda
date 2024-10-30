@@ -31,7 +31,8 @@ jobs:
       - name: 'Azure Load Testing'
         uses: azure/load-testing@v1
         with:
-          loadTestConfigFile: 'src/KEDA.DAPR.Demo/src/tests/${{ inputs.CONTAINER_NAME }}/config.yaml'
+          #loadTestConfigFile: 'src/KEDA.DAPR.Demo/src/tests/${{ inputs.CONTAINER_NAME }}/config.yaml'
+          loadTestConfigFile: './.github/workflows/loadtesting/config.yaml'
           loadTestResource: ${{ steps.application_env_vars.outputs.LOAD_TESTING_NAME }}
           resourceGroup: ${{ vars.RESOURCE_GROUP }}
           env: |
