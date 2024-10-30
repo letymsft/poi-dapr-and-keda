@@ -41,13 +41,6 @@ jobs:
                 "value": "${{ steps.application_env_vars.outputs.APPLICATION_URL }}"
               }
             ]
-          secrets: |
-            [
-              {
-                "name": "SUBNET_LT",
-                "value": "${{ secrets.SUBNET_LT }}"
-              }
-            ]
       - uses: actions/upload-artifact@v4.4.0
         with:
           name: loadTestResults
