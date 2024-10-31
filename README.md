@@ -1,6 +1,6 @@
 # DAPR&KEDAIlluminationPath
 
-![Model](https://github.com/letymsft/poi-dapr-and-keda/blob/main/images/ArchitectureDiagram.png)
+![Model](https://github.com/letymsft/poi-dapr-and-keda/blob/main/images/ArchitectureDiagram.jpg)
 
 ## Here are the rules
 1. You don’t talk about Fight Club
@@ -49,8 +49,6 @@ Once the previous execution has finished successfully, run the workflows:
 * ACA DEV API Presupuesto
 Once all the previous executions have finished, wait for 2-3 minutes to continue with the next step.
 
-## DAPR
-
 ### Task 8 🪙
 In Azure Portal, go to resource group "CUS-CSU-DEV-GHADOP-RGP", and find the "apiiniciativa" container app created onto it. Copy the Login Server value.
 
@@ -74,10 +72,6 @@ In Azure Portal, monitor the Log stream from apiiniciativa, apiarquitectura and 
 
 ### Task 11 🪙
 In Azure Portal, monitor the content of subscription "ftp-subscription" from topic "ftppubsub" in the Service Bus.
-
-## KEDA
-
-### Task n 🪙
 
 ## Challenges
 ### DAPR 🪙🪙🪙
