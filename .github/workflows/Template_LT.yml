@@ -20,6 +20,14 @@ jobs:
         uses: azure/login@v2
         with:
          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Replace tokens
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '${'
+          tokenSuffix: '}'
+          files: '["src/KEDA.DAPR.Demo/src/tests/${{ inputs.CONTAINER_NAME }}/config.yaml"]'
+        env:
+            CONTAINER_NAME: ${{ inputs.CONTAINER_NAME }}
       - name: Init Application env vars
         id: application_env_vars
         run: |
