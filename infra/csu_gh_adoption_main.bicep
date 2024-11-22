@@ -233,6 +233,7 @@ module containerApiIniciativa 'br/public:avm/res/app/container-app:0.7.0' = {
     ]
   }
   dependsOn: [
+    module_resourceGroup
     module_environment
     module_containerregistry
   ]
@@ -278,6 +279,7 @@ module containerApiArquitectura 'br/public:avm/res/app/container-app:0.7.0' = {
     ]
   }
   dependsOn: [
+    module_resourceGroup
     module_environment
     module_containerregistry
   ]
@@ -323,6 +325,7 @@ module containerApiPresupuesto 'br/public:avm/res/app/container-app:0.7.0' = {
     ]
   }
   dependsOn: [
+    module_resourceGroup
     module_environment
     module_containerregistry
   ]
@@ -337,5 +340,8 @@ module loadTestingComponent 'br/public:avm/res/load-test-service/load-test:0.3.0
     name: replaceAll(loadTesting.name, tokenReplacements, false)
     location: location
   }
+  dependsOn: [
+    module_resourceGroup
+  ]
 }
 //////////////////////////////////////////End infrastructure for load testing///////////////////////////////////////////
